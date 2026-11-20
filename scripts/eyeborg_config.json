@@ -1,0 +1,229 @@
+{
+  "project": "EYEBORG",
+  "revision": "2026-11-20-blue-exoskeleton-anthropometry-confirmed",
+  "units": "mm",
+  "coordinate_system": {
+    "front": "-Y",
+    "rear": "+Y",
+    "up": "+Z",
+    "user_left": "+X"
+  },
+  "reference_priority": "eight blue user-provided reference views in references/",
+  "anthropometry": {
+    "head_envelope_xyz_mm": [
+      165.0,
+      202.0,
+      215.0
+    ],
+    "head_circumference_mm": 570.0,
+    "neck_circumference_mm": 380.0,
+    "lens_span_mm": 140.0,
+    "ipd_mm": 65.0,
+    "brow_to_nasal_bridge_mm": 20.0,
+    "nasal_bridge_to_tip_mm": 40.0,
+    "nose_width_mm": 35.0,
+    "ear_axis_yz_mm": [
+      6.0,
+      -18.0
+    ],
+    "status": "USER_VERIFIED_ANTHROPOMETRY_WITH_FIELD_LEVEL_TRACEABILITY",
+    "head_envelope_status": "USER_VERIFIED_PREVIOUSLY",
+    "head_circumference_status": "USER_CONFIRMED_2026-11-20",
+    "head_curvature_reference_cm": [
+      27.0,
+      35.5
+    ],
+    "head_curvature_reference_mm": [
+      270.0,
+      355.0
+    ],
+    "head_curvature_status": "USER_CONFIRMED_2026-11-20_AXES_AND_MEASUREMENT_PATH_NOT_SPECIFIED",
+    "lens_span_status": "USER_CONFIRMED_2026-11-20_MEANING_AS_RECORDED",
+    "ipd_status": "USER_CONFIRMED_2026-11-20",
+    "mandible_measurement_cm": 25.0,
+    "mandible_measurement_mm": 250.0,
+    "mandible_measurement_status": "USER_CONFIRMED_2026-11-20_MEASUREMENT_PATH_NOT_SPECIFIED",
+    "neck_circumference_status": "USER_CONFIRMED_2026-11-20",
+    "verified_by": "user",
+    "last_user_review": "2026-11-20",
+    "legacy_measurements_status": "PENDING_USER_RECONFIRMATION",
+    "brow_to_nasal_bridge_status": "LEGACY_REFERENCE_NOT_RECONFIRMED_IN_2026-11-20_REVIEW",
+    "nasal_bridge_to_tip_status": "LEGACY_REFERENCE_NOT_RECONFIRMED_IN_2026-11-20_REVIEW",
+    "nose_width_status": "LEGACY_REFERENCE_NOT_RECONFIRMED_IN_2026-11-20_REVIEW",
+    "ear_axis_status": "LEGACY_CAD_COORDINATE_NOT_RECONFIRMED_IN_2026-11-20_REVIEW"
+  },
+  "fit": {
+    "head_clearance_mm": 6.0,
+    "eva_pad_thickness_mm": 5.0,
+    "nominal_wall_mm": 3.2,
+    "nominal_rib_diameter_mm": 3.2,
+    "ear_clear_window_mm": [
+      68.0,
+      52.0
+    ],
+    "minimum_clearance_above_ear_axis_mm": 26.0,
+    "neck_lowest_z_mm": -80.0,
+    "status": "PROVISIONAL_DESIGN_TARGETS"
+  },
+  "front_features": {
+    "frame_width_mm": 150.0,
+    "frame_depth_sagitta_mm": 32.0,
+    "upper_z_mm": 35.0,
+    "lower_z_mm": -27.0,
+    "nasal_notch_top_z_mm": -22.0,
+    "nasal_notch_half_width_mm": 20.5,
+    "eye_slit_center_z_mm": -10.0,
+    "eye_slit_nominal_mm": [
+      48.0,
+      8.0
+    ]
+  },
+  "components": {
+    "lipo_bat_li_1000": {
+      "size_mm_xyz": [
+        36.0,
+        18.0,
+        6.0
+      ],
+      "status": "USER_INVENTORY_INTERPRETED"
+    },
+    "tp4056_usb_c": {
+      "size_mm_xyz": [
+        12.0,
+        17.0,
+        5.0
+      ],
+      "status": "USER_RECORDED_NEEDS_PORT_CHECK"
+    },
+    "mt3608": {
+      "size_mm_xyz": [
+        21.0,
+        20.0,
+        10.0
+      ],
+      "status": "USER_INVENTORY_INTERPRETED"
+    },
+    "pcm5102a": {
+      "size_mm_xyz": [
+        32.0,
+        18.0,
+        15.0
+      ],
+      "status": "USER_APPROXIMATE"
+    },
+    "esp32_cam_ai_thinker_complete": {
+      "size_mm_xyz": [
+        40.0,
+        28.0,
+        29.0
+      ],
+      "status": "USER_INVENTORY_APPROXIMATE"
+    },
+    "nodemcu_esp8266_esp12e": {
+      "size_mm_xyz": [
+        49.0,
+        26.0,
+        13.0
+      ],
+      "status": "LEGACY_PROVISIONAL_NOT_IN_XLSX"
+    },
+    "usb_c_connector": {
+      "size_mm_xy": [
+        8.4,
+        2.6
+      ],
+      "status": "LEGACY_ESTIMATE"
+    },
+    "usb_c_window": {
+      "size_mm_xy": [
+        10.0,
+        4.5
+      ],
+      "status": "LEGACY_PROVISIONAL"
+    },
+    "audio_jack_bushing_diameter_mm": 6.0,
+    "audio_jack_hole_diameter_mm": 6.5
+  },
+  "camera": {
+    "legacy_case_mm_xyz": [
+      41.5,
+      28.0,
+      14.5
+    ],
+    "legacy_board_mm_xyz": [
+      40.5,
+      27.0,
+      1.6
+    ],
+    "current_full_module_envelope_mm_xyz": [
+      40.0,
+      28.0,
+      29.0
+    ],
+    "blockout_case_outer_mm_xyz": [
+      46.0,
+      34.0,
+      35.0
+    ],
+    "status": "CONFLICT_REQUIRES_PHYSICAL_RECHECK"
+  },
+  "legacy_fit_assumptions": {
+    "cavity_lateral_clearance_each_side_mm": 0.5,
+    "cavity_depth_clearance_total_mm": 1.0,
+    "jack_radial_clearance_mm": 0.25,
+    "note": "These are earlier design assumptions, not validated process capability. Print calibration coupons before final fit."
+  },
+  "branch_style": {
+    "width_scale": 1.0,
+    "thickness_scale": 1.0,
+    "note": "Multiplicadores globales de ancho/grosor de las correas laterales; ajuste visual."
+  },
+  "shell": {
+    "A": 88.0,
+    "B": 135.0,
+    "C": 72.0,
+    "cz": 5.0,
+    "note": "Ya no se usa para la estructura (rev. esqueleto 3D); se conserva por compatibilidad."
+  },
+  "fusion": {
+    "enabled": true,
+    "voxel_mm": 0.9,
+    "smooth_iterations": 10
+  },
+  "fasteners": {
+    "hole_diameter_mm": 3.0,
+    "tip_hole_diameter_mm": 2.6,
+    "camera_plate_mm_xyz": [
+      60.0,
+      40.0,
+      5.0
+    ],
+    "camera_plate_center_mm": [
+      0.0,
+      -118.0,
+      48.5
+    ],
+    "camera_pocket_mm_xyz": [
+      42.0,
+      30.0,
+      3.0
+    ],
+    "camera_cable_slot_mm": [
+      14.0,
+      10.0
+    ],
+    "status": "PROVISIONAL_VISUAL_PATTERN_NOT_FINAL_HARDWARE",
+    "note": "Patron de agujeros y bolsa inspirado en las vistas azules; elegir tornillos/insertos antes de fabricar."
+  },
+  "spikes": {
+    "enabled": true,
+    "note": "Puntas afiladas decorativas inspiradas en referencias metalicas; no deben contactar piel/ojos. Redondear punta (>=0.5 mm) al imprimir.",
+    "length_scale": 1.3
+  },
+  "ergonomics": {
+    "head_gap_mm": 6.0,
+    "nose_keepout_half_mm": 20.5,
+    "status": "APPLIED_TO_CENTERLINES_NOT_VALIDATED_ON_REAL_HEAD",
+    "note": "Holgura minima a la envolvente de cabeza y corredor nasal libre; la envolvente es un elipsoide, no un escaneo."
+  }
+}
