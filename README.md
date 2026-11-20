@@ -24,6 +24,7 @@ Este repositorio contiene el **modelo 3D paramétrico** (scripts de Blender), lo
 - [Componentes electrónicos](#componentes-electrónicos)
 - [Parámetros CAD, holguras y fabricación](#parámetros-cad-holguras-y-fabricación)
 - [Ergonomía aplicada al modelo](#ergonomía-aplicada-al-modelo)
+- [Control de calidad del modelo](#control-de-calidad-del-modelo)
 - [Arquitectura mecánica y modular](#arquitectura-mecánica-y-modular)
 - [Arquitectura de software y red](#arquitectura-de-software-y-red)
 - [Cableado y alimentación (conceptual)](#cableado-y-alimentación-conceptual)
@@ -41,7 +42,7 @@ Este repositorio contiene el **modelo 3D paramétrico** (scripts de Blender), lo
 | | **Diseño 1: estructura** | **Diseño 2: cableado + materiales** |
 | --- | --- | --- |
 | Archivo | [`output/EYEBORG.blend`](output/EYEBORG.blend) | [`output/EYEBORG_CABLEADO.blend`](output/EYEBORG_CABLEADO.blend) |
-| Contenido | Exoesqueleto abierto de malla fusionada, plataforma de cámara con bolsa, agujeros de montaje, espinas de acento, módulos de referencia | Todo el diseño 1 **+** cableado discreto simulado (por la cara interna de los rieles), conectores, capacitores, componentes, materiales procedurales (cromo azul, fibra de carbono, mangas de cable, emisivos) y estudio de iluminación con 4 cámaras |
+| Contenido | Exoesqueleto abierto de malla fusionada, plataforma de cámara con bolsa, agujeros de montaje, espinas de acento, módulos de referencia | Todo el diseño 1 **+** cableado discreto simulado (por la cara interna de los rieles), conectores, capacitores, componentes, maniquí esquemático, materiales procedurales (cromo azul, fibra de carbono, mangas de cable, emisivos) y estudio de iluminación con 4 cámaras |
 | Uso | Evaluar forma, ergonomía y modularidad | Visualizar recorridos de cables y la estética final |
 
 <table>
@@ -178,7 +179,38 @@ Sobre la base del expediente, el modelo incorpora comprobaciones automáticas ([
 - **Ventana del oído** (68 × 52 mm) despejada.
 - **Plataforma y barra de cámara** desplazadas hacia delante de la frente.
 
-> La envolvente de cabeza es un elipsoide, **no un escaneo**; los valores nasales son heredados y están pendientes de reconfirmar. Validar con prototipo de baja resolución.
+Resultado actual (medido sobre la malla final, [`tools/check_ergonomia.py`](tools/check_ergonomia.py)):
+
+| Comprobación | Resultado |
+| --- | --- |
+| Vértices dentro del volumen de la cabeza | **0** |
+| Holgura mínima a la cabeza | **8.7 mm** (objetivo ≥ 6 mm) |
+| Vértices en la ventana del oído (68 × 52 mm) | **0** |
+| Vértices dentro de la nariz / el mentón del maniquí esquemático | **0 / 0** |
+| Vértices rozando el corredor nasal (±20.5 mm) | 4 (de 173 000) |
+
+> La envolvente de cabeza es un elipsoide, **no un escaneo**; los valores nasales son heredados y están pendientes de reconfirmar. El maniquí del diseño 2 (nariz, mentón y cuello de 380 mm de circunferencia) es **esquemático**. Validar con prototipo de baja resolución.
+
+---
+
+## Control de calidad del modelo
+
+Auditoría estructural automática ([`tools/auditar.py`](tools/auditar.py)) sobre ambos `.blend`:
+
+| Comprobación | Diseño 1 | Diseño 2 |
+| --- | --- | --- |
+| Malla estructural (`EYEBORG_FUSION`) | 172 397 caras | 172 397 caras |
+| Aristas no manifold / vértices sueltos / caras degeneradas | 0 / 0 / 0 | 0 / 0 / 0 |
+| Islas desconectadas | 1 (una sola pieza) | 1 (una sola pieza) |
+| Normales (volumen con signo positivo) | ✔ 249 cm³ | ✔ 249 cm³ |
+| Dimensiones (X × Y × Z) | 194 × 283 × 159 mm | 194 × 283 × 159 mm |
+| Objetos duplicados `.001` / datos huérfanos / sin material | 0 / 0 / 0 | 0 / 0 / 0 |
+| Espesor de pared: mediana / p95 | 6.2 / 14.2 mm | 6.2 / 14.2 mm |
+| Muestras con espesor < 1.2 mm | 6.4 % (puntas de espina) | 6.4 % (puntas de espina) |
+
+- **Peso:** el volumen de la estructura es de ≈ 249 cm³; como orden de magnitud, ≈ 0.31 kg si fuera macizo en PLA (1.24 g/cm³). Con paredes y relleno parcial será bastante menor. **Estimación, no validada.**
+- **Puntas finas:** el ~6 % de espesor < 1.2 mm corresponde a las puntas de aguja de las espinas, por debajo de lo que imprime una boquilla estándar: redondearlas o engrosarlas antes de imprimir.
+- La malla es estanca (manifold), pero **no se ha probado en un laminador (slicer) ni impresa**.
 
 ---
 
@@ -237,12 +269,12 @@ Navy_Project/
 │   ├── _eyeborg_core.py / _eyeborg_materials.py / _eyeborg_studio.py
 │   └── eyeborg_config.json     # Parámetros (medidas, holguras, espinas…)
 ├── output/
-│   ├── EYEBORG.blend           # Diseño 1
+│   ├── EYEBORG.blend           # Diseño 1 (acabado azul satinado)
 │   └── EYEBORG_CABLEADO.blend  # Diseño 2
 ├── references/
 │   ├── azules/                 # 8 vistas azules (geometría maestra) + lámina del expediente
 │   └── estetica/               # Referencias de estética cyborg / cyberpunk
-└── tools/                      # Renders, comparación y chequeo ergonómico
+└── tools/                      # Auditoría, chequeo ergonómico, renders y comparación
 ```
 
 ---
@@ -297,7 +329,7 @@ Riesgos principales: fidelidad geométrica (reconstrucción desde vistas), ajust
 
 ## Avisos y validación pendiente
 
-- Los archivos `.py` se han ejecutado en **Blender 5.1.2** y los modelos se generan sin errores; **no** se han validado manifold, espesores ni impresión.
+- Los archivos `.py` se han ejecutado en **Blender 5.1.2** y los modelos se generan sin errores; la malla pasa la auditoría estructural (manifold, una sola pieza), pero **no** se ha probado en un laminador ni impresa.
 - Las **espinas** son decorativas y de punta aguda: comprobar que ninguna contacte piel, ojos u oídos y redondear la punta al imprimir.
 - El **cableado** del diseño 2 es una **simulación visual**; no autoriza conectar ni energizar nada.
 - Conservar las etiquetas *provisional*, *pendiente* y *no energizar* al compartir este material.

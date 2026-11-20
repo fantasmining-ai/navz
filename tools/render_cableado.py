@@ -12,7 +12,8 @@ head = C.get('REF_CABEZA_BLOCKOUT')
 chrome = bpy.data.materials['EYEBORG_CROMO_AZUL']
 def shot(name, cam, xray=False):
     sc.camera = C[cam]
-    if head: head.hide_render = xray
+    for o_ in C:
+        if o_.name.startswith(('MANIQUI_', 'REF_CABEZA')): o_.hide_render = xray
     b = chrome.node_tree.nodes['Principled BSDF']
     b.inputs['Alpha'].default_value = 0.10 if xray else 1.0
 

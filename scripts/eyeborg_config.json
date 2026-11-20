@@ -188,7 +188,7 @@
   "fusion": {
     "enabled": true,
     "voxel_mm": 0.9,
-    "smooth_iterations": 10
+    "smooth_iterations": 32
   },
   "fasteners": {
     "hole_diameter_mm": 3.0,

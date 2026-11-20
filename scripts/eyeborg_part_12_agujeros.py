@@ -66,6 +66,9 @@ def build():
             specs.append(('cyl', (sgn*x, cy - py/2.0 + 3.5, cz), (0,0,1), rt, pz + 6))     # hilera frontal
         specs.append(('cyl', (sgn*24.5, cy + py/2.0 - 3.5, cz), (0,0,1), rt, pz + 6))      # esquinas traseras
     n = cut_with_specs(fused, specs)
+    from _eyeborg_core import clean_mesh
+    isl, nv = clean_mesh(fused)
+    fused['islas_eliminadas'] = isl
     fused['cortadores'] = n
     fused['agujeros_estado'] = F['status']
     return fused

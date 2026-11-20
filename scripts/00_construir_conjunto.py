@@ -44,4 +44,7 @@ for area in bpy.context.screen.areas if bpy.context.screen else []:
     if area.type == 'VIEW_3D':
         area.spaces.active.region_3d.view_distance = 390
         area.spaces.active.region_3d.view_location = (0,0,0)
+if not globals().get('EYEBORG_SKIP_FINISH'):
+    from _eyeborg_studio import acabado_diseno1
+    acabado_diseno1()
 print('EYEBORG: conjunto modular creado. Las piezas REF_* son envolventes y NO se imprimen.')

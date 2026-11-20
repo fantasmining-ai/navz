@@ -202,7 +202,7 @@ En el **Diseño 2** la estructura es de cromo azul y los cables van por la **car
 - Para ocultar piezas: en el panel **Outliner** (arriba a la derecha, lista de objetos) pulsa el **ojito 👁** junto al nombre.
   - Colección **`DISENO_2` → `EYEBORG_20_CABLEADO`**: todos los cables, conectores y capacitores.
   - Objeto **`EYEBORG_FUSION.001`** (el del diseño 2; el del diseño 1 se llama `EYEBORG_FUSION`): la estructura azul. Ocúltalo para ver solo cables y componentes.
-  - Objeto **`REF_CABEZA_BLOCKOUT`**: la cabeza de referencia (esfera).
+  - Objetos **`MANIQUI_NARIZ`, `MANIQUI_MENTON`, `MANIQUI_CUELLO`** y **`REF_CABEZA_BLOCKOUT`**: el maniquí esquemático de referencia (cabeza, nariz, mentón y cuello).
 
 Qué es cada cable (colores de ayuda visual):
 

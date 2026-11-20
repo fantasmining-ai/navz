@@ -27,4 +27,9 @@ print('VERTICES_EN_CORREDOR_NASAL', len(nose))
 # oreja: cualquier vertice de estructura en la ventana 68x52 centrada en el eje del oido (y=6, z=-18), |x|>60
 ear_any = [p for p in vs if abs(p.y-6) < 34 and abs(p.z+18) < 26 and abs(p.x) > 60]
 print('VERTICES_EN_VENTANA_OREJA_TOTAL', len(ear_any))
+# maniqui esquematico: nariz (elipsoide) y menton; ningun vertice de la estructura debe estar dentro
+def dentro(p, c, r): return ((p.x-c[0])/r[0])**2 + ((p.y-c[1])/r[1])**2 + ((p.z-c[2])/r[2])**2 < 1.0
+nose_in = [p for p in vs if dentro(p, (0,-104,-14), (11.2,16.8,22.0))]
+chin_in = [p for p in vs if dentro(p, (0,-84,-88), (30,26,22))]
+print('VERTICES_DENTRO_NARIZ', len(nose_in), 'VERTICES_DENTRO_MENTON', len(chin_in))
 print('CHECK OK')

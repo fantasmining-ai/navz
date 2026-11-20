@@ -67,8 +67,8 @@ def _band(name, pts, k, r, mat, col):
 def _capacitor(name, loc, mat, alu, col, note):
     body = _cyl(name+'_CUERPO', 3.2, 8.0, loc, mat, col)
     _cyl(name+'_TAPA', 3.25, 0.5, (loc[0], loc[1], loc[2]+4.2), alu, col)
-    for dx in (-1.1, 1.1):
-        _cyl(name+'_PATA', 0.28, 5.0, (loc[0]+dx, loc[1], loc[2]-6.0), alu, col, verts=8)
+    for k_, dx in enumerate((-1.1, 1.1)):
+        _cyl(name+'_PATA_%d' % (k_+1), 0.28, 5.0, (loc[0]+dx, loc[1], loc[2]-6.0), alu, col, verts=8)
     body['valor'] = 'POR DEFINIR (decoupling; no inventar capacitancia)'
     body['nota'] = note
     return body
@@ -118,7 +118,28 @@ def build():
     _capacitor('CAP_DAC', (2, 112, -33), M['cap_blue'], M['alu'], col, 'desacople PCM5102A; capacitancia por definir')
     # ---- LED de estado en la barra (acento cyberpunk, 1 mm)
     led = _cable('LED_BARRA', [Vector((x, -119.8, 45.5)) for x in (-18, -9, 0, 9, 18)], 0.55, M['led_cyan'], col, 'acento visual; no es un circuito')
+    _maniqui(M, col)
     return col
+
+
+def _maniqui(M, col):
+    """Maniqui esquematico (NO escaneo): nariz, menton y cuello con las medidas del expediente; sirve para ver el corredor nasal."""
+    import bmesh
+    from mathutils import Matrix
+    def ell(name, c, r, mat_):
+        bm = bmesh.new(); bmesh.ops.create_uvsphere(bm, u_segments=40, v_segments=24, radius=1.0,
+            matrix=Matrix.Translation(Vector(c)) @ Matrix.Diagonal(Vector((r[0], r[1], r[2], 1.0))))
+        me = bpy.data.meshes.new(name+'_MESH'); bm.to_mesh(me); bm.free()
+        o = bpy.data.objects.new(name, me); col.objects.link(o); me.materials.append(mat_)
+        for p_ in me.polygons: p_.use_smooth = True
+        o['nota'] = 'maniqui esquematico; no es un escaneo'
+        return o
+    nose_len = ANTHROPOMETRY.get('nasal_bridge_to_tip_mm', 40.0); nose_w = ANTHROPOMETRY.get('nose_width_mm', 35.0)
+    ell('MANIQUI_NARIZ', (0, -104, -14), (nose_w*0.32, nose_len*0.42, nose_len*0.55), M['head'])
+    ell('MANIQUI_MENTON', (0, -84, -88), (30, 26, 22), M['head'])
+    neck_r = 380.0 / (2 * math.pi)     # circunferencia de cuello 380 mm
+    cyl = _cyl('MANIQUI_CUELLO', neck_r, 120.0, (0, 6, -150), M['head'], col, verts=48)
+    cyl['nota'] = 'radio calculado de la circunferencia de cuello verificada (380 mm)'
 
 if __name__ == "__main__":
     build()

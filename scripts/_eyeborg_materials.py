@@ -103,5 +103,5 @@ def build_all():
         'lipo': plastic('LIPO_FUNDA', (0.10, 0.16, 0.42, 1), 0.3),
         'cap_blue': plastic('CAP_MANGA_AZUL', (0.02, 0.07, 0.34, 1), 0.35),
         'jst': plastic('CONECTOR_BLANCO', (0.82, 0.82, 0.78, 1), 0.5),
-        'head': plastic('MANIQUI_MATE', (0.11, 0.115, 0.13, 1), 0.5),
+        'head': plastic('MANIQUI_MATE', (0.16, 0.16, 0.17, 1), 0.5),
     }

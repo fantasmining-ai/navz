@@ -421,8 +421,11 @@ def fuse_objects(name, objects, collection, material=None, voxel_mm=1.6, smooth_
     bpy.context.scene.collection.objects.link(tmp)
     r = tmp.modifiers.new('Remesh', 'REMESH')
     r.mode = 'VOXEL'; r.voxel_size = voxel_mm; r.use_smooth_shade = True
-    s = tmp.modifiers.new('Smooth', 'SMOOTH')
-    s.factor = 0.6; s.iterations = smooth_iters
+    s = tmp.modifiers.new('Suavizado', 'LAPLACIANSMOOTH')   # conserva volumen: no come las puntas finas
+    s.iterations = smooth_iters; s.lambda_factor = 0.5; s.lambda_border = 0.0
+    s.use_volume_preserve = True; s.use_normalized = True
+    r2 = tmp.modifiers.new('Remesh2', 'REMESH')   # segunda pasada: garantiza malla estanca tras el suavizado
+    r2.mode = 'VOXEL'; r2.voxel_size = voxel_mm; r2.use_smooth_shade = True
     dg = bpy.context.evaluated_depsgraph_get()
     me = bpy.data.meshes.new_from_object(tmp.evaluated_get(dg), depsgraph=dg)
     me.name = name + '_MESH'
@@ -539,3 +542,41 @@ def node_blob(name, center, normal, rx, ry, rz, collection, material=None, mirro
         poly.use_smooth = True
     obj['familia'] = 'nodo_union_organico'
     return obj
+
+
+def clean_mesh(obj, min_verts=1500):
+    """Elimina caras degeneradas y fragmentos sueltos (< min_verts vertices). Devuelve (islas_eliminadas, vertices)."""
+    import bmesh
+    bm = bmesh.new(); bm.from_mesh(obj.data)
+    bm.verts.ensure_lookup_table()
+    seen = set(); small = []; n_isl = 0
+    for v in bm.verts:
+        if v.index in seen:
+            continue
+        comp = []; st = [v]
+        while st:
+            a = st.pop()
+            if a.index in seen:
+                continue
+            seen.add(a.index); comp.append(a)
+            st += [e.other_vert(a) for e in a.link_edges if e.other_vert(a).index not in seen]
+        if len(comp) < min_verts:
+            small += comp; n_isl += 1
+    if small:
+        bmesh.ops.delete(bm, geom=small, context='VERTS')
+    # reparacion manifold: aristas compartidas por >2 caras (puntas de aguja colapsadas por el suavizado)
+    for _ in range(4):
+        bad = [e for e in bm.edges if len(e.link_faces) > 2]
+        if not bad:
+            break
+        faces = list({f for e in bad for f in e.link_faces})
+        bmesh.ops.delete(bm, geom=faces, context='FACES')
+        loose = [v for v in bm.verts if not v.link_faces]
+        if loose:
+            bmesh.ops.delete(bm, geom=loose, context='VERTS')
+        bnd = [e for e in bm.edges if e.is_boundary]
+        if bnd:
+            bmesh.ops.holes_fill(bm, edges=bnd, sides=12)
+    bmesh.ops.recalc_face_normals(bm, faces=bm.faces[:])
+    bm.to_mesh(obj.data); bm.free(); obj.data.update()
+    return n_isl, len(small)

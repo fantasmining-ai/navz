@@ -40,10 +40,10 @@ def studio(M, floor_z=-150):
     nt.links.new(tc.outputs['Generated'], sep.inputs['Vector'])
     mr.inputs['From Min'].default_value = -1.0; mr.inputs['From Max'].default_value = 1.0
     nt.links.new(sep.outputs['Z'], mr.inputs['Value']); nt.links.new(mr.outputs['Result'], cr.inputs['Fac'])
-    cr.color_ramp.elements[0].color = (0.002, 0.004, 0.008, 1); cr.color_ramp.elements[1].color = (0.10, 0.18, 0.26, 1)
+    cr.color_ramp.elements[0].color = (0.002, 0.004, 0.008, 1); cr.color_ramp.elements[1].color = (0.16, 0.22, 0.30, 1)
     for pos, colr in ((0.30, (0.01, 0.02, 0.03, 1)), (0.47, (0.0, 0.0, 0.0, 1)), (0.52, (1.0, 1.0, 1.0, 1)), (0.57, (0.0, 0.0, 0.0, 1)), (0.80, (0.0, 0.45, 0.6, 1))):
         e = cr.color_ramp.elements.new(pos); e.color = colr
-    nt.links.new(cr.outputs['Color'], bg.inputs['Color']); bg.inputs['Strength'].default_value = 2.5
+    nt.links.new(cr.outputs['Color'], bg.inputs['Color']); bg.inputs['Strength'].default_value = 7.0
     # fondo visible oscuro (rayos de camara) manteniendo el degradado para reflejos del cromo
     lp = nt.nodes.new('ShaderNodeLightPath'); dark = nt.nodes.new('ShaderNodeBackground')
     dark.inputs['Color'].default_value = (0.004, 0.007, 0.014, 1); dark.inputs['Strength'].default_value = 1.0
@@ -54,9 +54,9 @@ def studio(M, floor_z=-150):
     # suelo oscuro y pulido
     bpy.ops.mesh.primitive_plane_add(size=4000, location=(0, 0, floor_z)); fl = bpy.context.object; fl.name = 'SUELO_ESTUDIO'
     fm = bpy.data.materials.new('SUELO_NEGRO_PULIDO'); fm.use_nodes = True
-    b = fm.node_tree.nodes['Principled BSDF']; b.inputs['Base Color'].default_value = (0.004, 0.005, 0.007, 1); b.inputs['Roughness'].default_value = 0.55
+    b = fm.node_tree.nodes['Principled BSDF']; b.inputs['Base Color'].default_value = (0.004, 0.005, 0.007, 1); b.inputs['Roughness'].default_value = 0.9
     for k_ in ('Specular IOR Level', 'Specular'):
-        if k_ in b.inputs: b.inputs[k_].default_value = 0.12
+        if k_ in b.inputs: b.inputs[k_].default_value = 0.0
     fl.data.materials.append(fm)
     # luces por rol
     col = bpy.data.collections.new('LIGHTING_Estudio'); sc.collection.children.link(col)
@@ -70,7 +70,7 @@ def studio(M, floor_z=-150):
         return o
     area('LGT_key', (520, -420, 380), (0, 0, 10), 5000, 420, (1.0, 0.97, 0.92), sy=70)
     area('LGT_fill', (-520, -380, 120), (0, 0, 10), 900, 500, (0.7, 0.85, 1.0), sy=300)
-    area('LGT_rim_cian', (-300, 520, 260), (0, 0, 10), 6000, 300, (0.0, 0.85, 1.0), sy=40)
+    area('LGT_rim_cian', (-300, 520, 260), (0, 0, 10), 3500, 300, (0.0, 0.85, 1.0), sy=40)
     area('LGT_rim_magenta', (380, 480, 180), (0, 0, 10), 4500, 300, (1.0, 0.1, 0.65), sy=40)
     # camaras de producto
     def cam(name, loc, target, lens):
@@ -85,3 +85,36 @@ def studio(M, floor_z=-150):
     }
     sc.camera = cams['CAM_hero']
     return cams
+
+
+def acabado_diseno1():
+    """Diseño 1: acabado azul satinado, luz de estudio sencilla y camara; elimina los objetos por defecto."""
+    for nm in ('Cube', 'Light', 'Camera'):
+        o = bpy.data.objects.get(nm)
+        if o: bpy.data.objects.remove(o, do_unlink=True)
+    sc = bpy.context.scene
+    m = bpy.data.materials.get('EYEBORG_AZUL_SATINADO') or bpy.data.materials.new('EYEBORG_AZUL_SATINADO')
+    m.use_nodes = True; b = m.node_tree.nodes['Principled BSDF']
+    b.inputs['Base Color'].default_value = (0.02, 0.38, 0.60, 1); b.inputs['Metallic'].default_value = 0.55
+    b.inputs['Roughness'].default_value = 0.30
+    if 'Coat Weight' in b.inputs: b.inputs['Coat Weight'].default_value = 0.3
+    f = bpy.data.objects.get('EYEBORG_FUSION')
+    if f:
+        f.data.materials.clear(); f.data.materials.append(m)
+        for p in f.data.polygons: p.material_index = 0
+    # mundo gris claro de estudio
+    w = bpy.data.worlds.new('EYEBORG_D1'); sc.world = w; w.use_nodes = True
+    bg = w.node_tree.nodes['Background']; bg.inputs['Color'].default_value = (0.55, 0.58, 0.62, 1); bg.inputs['Strength'].default_value = 0.9
+    col = bpy.data.collections.new('LIGHTING_Diseno1'); sc.collection.children.link(col)
+    def luz(name, loc, power, size):
+        d = bpy.data.lights.new(name, 'AREA'); d.energy = power; d.size = size
+        o = bpy.data.objects.new(name, d); col.objects.link(o); o.location = loc
+        o.rotation_euler = (Vector((0, 0, 10)) - Vector(loc)).to_track_quat('-Z', 'Y').to_euler()
+    luz('LGT_key', (520, -420, 380), 4000, 420); luz('LGT_fill', (-520, -380, 120), 900, 500)
+    cd = bpy.data.cameras.new('CAM_diseno1'); cd.lens = 70; cd.clip_end = 8000
+    cam = bpy.data.objects.new('CAM_diseno1', cd); sc.collection.objects.link(cam)
+    cam.location = (430, -560, 230)
+    cam.rotation_euler = (Vector((0, -5, 5)) - Vector(cam.location)).to_track_quat('-Z', 'Y').to_euler()
+    sc.camera = cam
+    sc.render.engine = 'BLENDER_EEVEE' if 'BLENDER_EEVEE' in [e.identifier for e in bpy.types.RenderSettings.bl_rna.properties['engine'].enum_items] else 'BLENDER_EEVEE_NEXT'
+    sc.render.resolution_x, sc.render.resolution_y = 1100, 850

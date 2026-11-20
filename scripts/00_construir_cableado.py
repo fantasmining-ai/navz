@@ -6,13 +6,16 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 if ROOT not in sys.path:
     sys.path.insert(0, ROOT)
 import bpy
-runpy.run_path(os.path.join(ROOT, '00_construir_conjunto.py'), run_name='__main__')   # diseño 1 completo
+runpy.run_path(os.path.join(ROOT, '00_construir_conjunto.py'), run_name='__main__', init_globals={'EYEBORG_SKIP_FINISH': True})   # diseño 1 completo
 import importlib.util
 def _load(fn, nm):
     spec = importlib.util.spec_from_file_location(nm, os.path.join(ROOT, fn)); m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m); return m
 cab = _load('eyeborg_part_13_cableado.py', 'eyeborg_cab')
 cab.build()
 from _eyeborg_materials import build_all
+for _n in ('Cube', 'Light', 'Camera'):
+    _o = bpy.data.objects.get(_n)
+    if _o: bpy.data.objects.remove(_o, do_unlink=True)
 from _eyeborg_studio import assign_materials, studio
 M = build_all()
 assign_materials(M)
