@@ -425,6 +425,76 @@
         75,
         38
       ]
-    }
+    },
+    "torso_proxies": [
+      {
+        "name": "busto",
+        "c": [
+          0,
+          15,
+          -215
+        ],
+        "r": [
+          150,
+          75,
+          38
+        ]
+      },
+      {
+        "name": "trapecios",
+        "c": [
+          0,
+          24,
+          -188
+        ],
+        "r": [
+          118,
+          58,
+          30
+        ]
+      }
+    ],
+    "neck_axis_y": 12.0
+  },
+  "kinematics": {
+    "pivot_upper_mm": [
+      0,
+      8,
+      -98
+    ],
+    "pivot_lower_mm": [
+      0,
+      18,
+      -192
+    ],
+    "split_upper": {
+      "sagittal": 0.45,
+      "axial": 0.5,
+      "lateral": 0.2
+    },
+    "nota": "Cuello de dos articulaciones (suboccipital y cervical inferior). Rangos de la literatura; ver docs/SPEC_AJUSTE_ANATOMICO.md."
+  },
+  "mass_estimates": {
+    "estado": "ESTIMADO_NO_VERIFICADO",
+    "cabeza_g": 4500,
+    "cabeza_com_mm": [
+      0,
+      -8,
+      10
+    ],
+    "estructura_g": 90,
+    "estructura_nota": "249 cm3 x 1.2 g/cm3 x ~0.3 (paredes+relleno parcial)",
+    "pod_camara_g": 25,
+    "pod_camara_com_mm": [
+      0,
+      -117,
+      55
+    ],
+    "bandeja_componentes_g": 40,
+    "bandeja_com_mm": [
+      0,
+      114,
+      -6
+    ]
   }
 }

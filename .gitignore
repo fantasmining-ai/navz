@@ -9,3 +9,5 @@ __pycache__/
 Thumbs.db
 # Renders intermedios (los publicados viven en docs/img)
 renders_tmp/
+references/privadas_local/
+simulaciones/_frames/
