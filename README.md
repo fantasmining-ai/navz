@@ -280,7 +280,7 @@ Los **diseños 2 y 3** visualizan este concepto con cables por la cara interna d
 
 ## Versiones anteriores
 
-Las versiones previas de los diseños **no se borraron**: están archivadas por versión en [`versiones/`](versiones/README.md) (v1 primer modelo, v2 pulido, **v3 tres diseños con frente de abanico**, v4 visor inuit con maniquí de elipsoides), cada una con sus `.blend`, imágenes, métricas y cómo abrirla. La carpeta [`modelos/`](modelos/) y [`vistas/`](vistas/) siempre contienen la **versión actual (v5)**.
+Las versiones previas de los diseños **no se borraron**: están archivadas por versión en [`versiones/`](versiones/README.md) (v1 primer modelo, v2 pulido, **v3 tres diseños con frente de abanico**, v4 visor inuit con maniquí de elipsoides), cada una con sus `.blend`, imágenes, métricas y cómo abrirla. **A todas se les añadió la cabeza realista CC0** (sin tocar sus estructuras) para compararlas en igualdad de condiciones. La carpeta [`modelos/`](modelos/) y [`vistas/`](vistas/) siempre contienen la **versión actual (v5)**.
 
 ## Estructura del repositorio
 

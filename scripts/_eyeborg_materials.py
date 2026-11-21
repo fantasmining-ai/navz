@@ -4,12 +4,13 @@ import bpy
 
 
 def _principled(m):
+    """Reinicia el arbol de nodos del material y crea una salida + Principled BSDF limpios.
+    (Se borran TODOS los nodos: en archivos guardados con otro idioma la salida no se llama 'Material Output'
+    y dejaba dos salidas, una sin conectar -> superficie negra.)"""
     m.use_nodes = True
     nt = m.node_tree
-    for n in list(nt.nodes):
-        if n.type != 'OUTPUT_MATERIAL':
-            nt.nodes.remove(n)
-    out = nt.nodes.get('Material Output') or nt.nodes.new('ShaderNodeOutputMaterial')
+    nt.nodes.clear()
+    out = nt.nodes.new('ShaderNodeOutputMaterial')
     b = nt.nodes.new('ShaderNodeBsdfPrincipled')
     nt.links.new(b.outputs['BSDF'], out.inputs['Surface'])
     return nt, b

@@ -2,7 +2,8 @@
 Uso: python tools/hojas_contacto.py"""
 import os, glob
 from PIL import Image, ImageDraw
-raiz = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+import sys
+raiz = os.path.abspath(sys.argv[1]) if len(sys.argv) > 1 else os.path.dirname(os.path.dirname(os.path.abspath(__file__)))   # carpeta que contiene vistas/ (por defecto la raiz del repo)
 DISENOS = (('diseno_1', 'Diseño 1 · Estructura (azul satinado)', 'modelos/EYEBORG.blend'),
            ('diseno_2', 'Diseño 2 · Cromo satinado + cableado', 'modelos/EYEBORG_CABLEADO.blend'),
            ('diseno_3', 'Diseño 3 · Resina translúcida + cableado', 'modelos/EYEBORG_CABLEADO_MATE.blend'))
@@ -13,6 +14,7 @@ md = ['# Vistas de los diseños EYEBORG\n',
       'Los diseños 2 y 3 añaden vistas en rayos X del cableado (solo sin maniquí).\n',
       '> Generadas con `tools/render_vistas.py` (Blender Cycles). Los archivos fuente están en `modelos/`.\n']
 for d, titulo, blend in DISENOS:
+    if not glob.glob(os.path.join(raiz, 'vistas', d, '*', '*.jpg')): continue
     md.append('\n## %s\n\nArchivo: `%s`\n' % (titulo, blend))
     for sub, nombre in VARIANTES:
         fs = sorted(glob.glob(os.path.join(raiz, 'vistas', d, sub, '*.jpg')))

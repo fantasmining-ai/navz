@@ -14,14 +14,20 @@ if not args or args[0] not in ('diseno_1', 'diseno_2', 'diseno_3'):
     raise SystemExit('Indica diseno_1, diseno_2 o diseno_3 tras "--"')
 design = args[0]; samples = int(args[1]) if len(args) > 1 else 40; resx = int(args[2]) if len(args) > 2 else 1400
 REANUDAR = 'reanudar' in args
+SALIDA = next((a.split('=', 1)[1] for a in args if a.startswith('salida=')), None)   # p. ej. salida=versiones/v3_... -> versiones/v3_.../vistas/
 PRUEBA = 'prueba' in args                       # escribe en renders_tmp/ y solo 3 vistas
 SOLO = [a.split('=', 1)[1] for a in args if a.startswith('solo=')]
 root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+OUT_ROOT = None
 sc = bpy.context.scene; C = bpy.data.objects
 sc.render.engine = 'CYCLES'; sc.cycles.samples = samples; sc.cycles.use_denoising = True
 sc.render.image_settings.file_format = 'JPEG'; sc.render.image_settings.quality = 92
 sc.render.resolution_x = resx; sc.render.resolution_y = int(resx * 0.75); sc.render.resolution_percentage = 100
 sc.view_settings.view_transform = 'AgX'
+if design == 'diseno_1':      # versiones antiguas sin mundo de estudio: gris claro como el diseño 1 actual
+    w = bpy.data.worlds[0] if bpy.data.worlds else bpy.data.worlds.new('W'); sc.world = w; w.use_nodes = True
+    bgn = w.node_tree.nodes.get('Background')
+    if bgn: bgn.inputs['Color'].default_value = (0.55, 0.58, 0.62, 1); bgn.inputs['Strength'].default_value = 0.9
 mann = [o for o in C if o.name.startswith('MANIQUI_')]
 for o in C:
     if o.name.startswith('REF_') or o.display_type == 'WIRE':
@@ -65,6 +71,8 @@ def vistas(con):
     ]
 
 def render(path):
+    if SALIDA:
+        path = path.replace(os.path.join(root, 'vistas'), os.path.join(os.path.abspath(os.path.join(root, SALIDA)), 'vistas'), 1)
     if PRUEBA:
         path = os.path.join(root, 'renders_tmp', design + '_' + os.path.basename(path))
     os.makedirs(os.path.dirname(path), exist_ok=True)
