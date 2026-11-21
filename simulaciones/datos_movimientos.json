@@ -35,12 +35,12 @@
     "giro_izq": 0,
     "inclinacion_izq": 0,
     "origen": "norma clínica ~50°",
-    "holgura_min_mm": 60.5,
-    "pieza_critica": "EYEBORG_FUSION",
+    "holgura_min_mm": 62.9,
+    "pieza_critica": "JACK_AUDIO_PUNTA",
     "punto": [
-      -1.3,
-      -145.3,
-      -193.9
+      26.0,
+      68.8,
+      -22.1
     ],
     "puntos_en_colision": 0
   },
@@ -50,12 +50,12 @@
     "giro_izq": 0,
     "inclinacion_izq": 0,
     "origen": "rango medido ~68°",
-    "holgura_min_mm": 57.2,
+    "holgura_min_mm": 72.3,
     "pieza_critica": "EYEBORG_FUSION",
     "punto": [
-      -0.4,
-      -136.7,
-      -218.6
+      -81.4,
+      -160.1,
+      -133.7
     ],
     "puntos_en_colision": 0
   },

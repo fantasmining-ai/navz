@@ -206,6 +206,7 @@ En los **diseños 2 y 3** los cables van por la **cara interna** de la estructur
 - Para ocultar piezas: en el panel **Outliner** (arriba a la derecha, lista de objetos) pulsa el **ojito 👁** junto al nombre.
   - Colección **`DISENO_2` (o `DISENO_3`) → `EYEBORG_20_CABLEADO`**: todos los cables, conectores y capacitores.
   - Objeto **`EYEBORG_FUSION`** (diseño 1), **`EYEBORG_FUSION.001`** (diseño 2) o **`EYEBORG_FUSION.002`** (diseño 3): la estructura. Ocúltalo para ver solo cables y componentes.
+  - Objetos **`VISOR_INUIT`** (visor con ranuras), **`BRAZO_SIEN_*`** (brazos de sien) y **`PAD_*`** (almohadillas de anclaje: se pueden ocultar para ver mejor).
   - Objetos **`MANIQUI_CUERPO`** (colección `EYEBORG_14_MANIQUI`) y **`REF_CABEZA_BLOCKOUT`**: el maniquí anatómico esquemático de referencia (cabeza con rasgos, cuello y busto).
 
 Qué es cada cable (colores de ayuda visual):

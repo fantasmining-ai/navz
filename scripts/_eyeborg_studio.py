@@ -20,7 +20,8 @@ def assign_materials(M):
     for nm in ('REF_NODEMCU', 'REF_TP4056', 'REF_MT3608', 'REF_DAC_PCM5102A'): setm(nm, 'pcb')
     setm('REF_LIPO', 'lipo')
     for o in bpy.data.objects:
-        if o.name.startswith('MANIQUI_'): setm(o.name, 'head')   # arcilla neutra solo en diseños 2 y 3 (el diseño 1 no cambia)
+        if o.name.startswith('MANIQUI_'): setm(o.name, 'head')
+        if o.name.startswith('PAD_'): setm(o.name, 'pad')   # arcilla neutra solo en diseños 2 y 3 (el diseño 1 no cambia)
     setm('CARCASA_CAMARA_PROVISIONAL', 'graphite'); setm('ARO_LENTE_CAMARA', 'led_cyan'); setm('LENTE_REFERENCIA_D6', 'graphite')
     setm('BANDEJA_ELECTRONICA_104x58x2', 'carbon')
     for o in bpy.data.objects:

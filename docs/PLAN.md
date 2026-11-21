@@ -14,7 +14,11 @@ Ver [`SPEC.md`](SPEC.md) para alcance y criterios.
 - [x] Galería `vistas/`: 9 vistas con y sin maniquí por diseño + rayos X del cableado.
 - [x] Repositorio reorganizado (`modelos/`, `vistas/`, `tools/dev/`).
 
+- [x] Ajuste anatómico (spec + investigación con fuentes + simulación de movimientos): visor inuit con ranuras alineadas a las pupilas, anclajes (nariz, frente, oreja), campo visual y distancias medidas.
+
 ## Pendiente
+- [ ] Verificar landmarks con fotos/escaneo de la persona; elegir ruta B para el maniquí (malla base CC0, requiere permiso de descarga).
+- [ ] F6: simulación facial dinámica (expresiones) y presión en almohadillas.
 - [ ] Reconfirmar medidas nasales y de oído heredadas; definir recorrido de “curvatura” y “mandíbula”.
 - [ ] Validar holguras con prototipo de baja resolución; escaneo 3D de cabeza si es posible.
 - [ ] Elegir tornillería/insertos y fijar el patrón final de agujeros.

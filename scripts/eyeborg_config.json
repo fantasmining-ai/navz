@@ -287,67 +287,93 @@
         "name": "ceja",
         "c": [
           0,
-          -93,
-          12
+          -94,
+          22
         ],
         "r": [
-          52,
-          13,
-          9
+          54,
+          11,
+          8
         ]
       },
       {
         "name": "parpado",
         "c": [
           32.5,
-          -92,
-          5
+          -87,
+          6
         ],
         "r": [
-          14,
-          8,
-          9
+          15,
+          12,
+          10
         ],
         "mirror": true,
         "ipd_x": true
       },
       {
-        "name": "puente_nasal",
+        "name": "dorso_nasal_alto",
         "c": [
           0,
-          -98,
-          -4
+          -95,
+          0
         ],
         "r": [
           5.5,
-          9,
-          16
+          6,
+          10
+        ]
+      },
+      {
+        "name": "dorso_nasal_medio",
+        "c": [
+          0,
+          -103,
+          -18
+        ],
+        "r": [
+          6,
+          8,
+          14
+        ]
+      },
+      {
+        "name": "dorso_nasal_bajo",
+        "c": [
+          0,
+          -112,
+          -33
+        ],
+        "r": [
+          8,
+          10,
+          10
         ]
       },
       {
         "name": "punta_nariz",
         "c": [
           0,
-          -108,
-          -26
+          -114,
+          -40
         ],
         "r": [
           10,
-          13,
-          11
+          10,
+          8
         ]
       },
       {
         "name": "aleta_nasal",
         "c": [
-          8,
-          -103,
-          -29
+          9,
+          -104,
+          -42
         ],
         "r": [
-          6.5,
-          8,
-          6.5
+          7,
+          7,
+          6
         ],
         "mirror": true
       },
@@ -356,7 +382,7 @@
         "c": [
           0,
           -96,
-          -55
+          -58
         ],
         "r": [
           15,
@@ -369,7 +395,7 @@
         "c": [
           0,
           -93,
-          -64
+          -67
         ],
         "r": [
           13,
@@ -380,14 +406,28 @@
       {
         "name": "mejilla",
         "c": [
-          38,
-          -83,
-          -36
+          44,
+          -84,
+          -24
         ],
         "r": [
-          21,
-          15,
-          19
+          17,
+          14,
+          16
+        ],
+        "mirror": true
+      },
+      {
+        "name": "cigomatico",
+        "c": [
+          62,
+          -58,
+          -14
+        ],
+        "r": [
+          14,
+          22,
+          14
         ],
         "mirror": true
       },
@@ -396,12 +436,12 @@
         "c": [
           84,
           6,
-          -18
+          -16
         ],
         "r": [
-          6,
-          13,
-          21
+          6.5,
+          15.5,
+          30
         ],
         "mirror": true
       }
@@ -496,5 +536,76 @@
       114,
       -6
     ]
+  },
+  "landmarks": {
+    "estado": "ESTIMADO_DE_LITERATURA_NO_MEDIDO_EN_LA_PERSONA",
+    "eye_center_z": 6.0,
+    "cornea_apex_y": -97.0,
+    "eyelid_surface_y": -99.0,
+    "nasion": [
+      0,
+      -92,
+      8
+    ],
+    "glabella": [
+      0,
+      -101,
+      16
+    ],
+    "pronasale": [
+      0,
+      -124,
+      -40
+    ],
+    "subnasale": [
+      0,
+      -103,
+      -47
+    ],
+    "alar_x": 17.5,
+    "tragus": [
+      77,
+      6,
+      -18
+    ],
+    "ear_top_z": 14.0,
+    "zygion": [
+      68,
+      -58,
+      -14
+    ],
+    "temple": [
+      78,
+      -20,
+      24
+    ],
+    "stomion": [
+      0,
+      -97,
+      -66
+    ],
+    "menton": [
+      0,
+      -104,
+      -107
+    ]
+  },
+  "visor": {
+    "estado": "PROVISIONAL",
+    "z_center_mm": 9.0,
+    "height_mm": 26.0,
+    "thickness_mm": 3.2,
+    "half_span_mm": 74.0,
+    "standoff_center_mm": 19.0,
+    "standoff_side_mm": 11.5,
+    "cornea_clearance_min_mm": 15.0,
+    "slit": {
+      "length_mm": 48.0,
+      "height_mm": 14.0,
+      "z_mm": 6.0,
+      "center_x_mm": 32.5
+    },
+    "pad_thickness_mm": 5.0,
+    "nota": "Visor tipo lentes inuit: banda curva con ranuras alineadas a las pupilas (IPD 65); anclajes en puente nasal, frente, sienes y oreja."
   }
 }

@@ -580,3 +580,48 @@ def clean_mesh(obj, min_verts=1500):
     bmesh.ops.recalc_face_normals(bm, faces=bm.faces[:])
     bm.to_mesh(obj.data); bm.free(); obj.data.update()
     return n_isl, len(small)
+
+
+# ---------------------------------------------------------------------------
+# Superficie facial de referencia, visor y anclajes (rev. ajuste anatomico)
+# ---------------------------------------------------------------------------
+def face_point(x, z, off=0.0):
+    """Punto de la superficie frontal de la envolvente de cabeza en (x, z) desplazado 'off' mm a lo largo de la normal."""
+    a, b, c = HEAD_SEMI
+    s = max(0.0, 1.0 - (x / a) ** 2 - (z / c) ** 2)
+    y = -b * math.sqrt(s)
+    n = Vector((x / a ** 2, y / b ** 2, z / c ** 2))
+    n = n.normalized() if n.length > 1e-9 else Vector((0, -1, 0))
+    return Vector((x, y, z)) + n * off, n
+
+
+def side_point(y, z, off=0.0, sign=1.0):
+    """Punto lateral (lado +X si sign>0) de la envolvente de cabeza en (y, z), desplazado 'off' mm por la normal."""
+    a, b, c = HEAD_SEMI
+    s = max(0.0, 1.0 - (y / b) ** 2 - (z / c) ** 2)
+    x = sign * a * math.sqrt(s)
+    n = Vector((x / a ** 2, y / b ** 2, z / c ** 2))
+    n = n.normalized() if n.length > 1e-9 else Vector((sign, 0, 0))
+    return Vector((x, y, z)) + n * off, n
+
+
+def visor_offset(x, V):
+    """Separacion visor-superficie: grande al centro (despeje de ojos/pestañas), pequena hacia las sienes."""
+    return V['standoff_side_mm'] + (V['standoff_center_mm'] - V['standoff_side_mm']) * max(0.0, 1.0 - (x / V['half_span_mm']) ** 2)
+
+
+def visor_point(x, z, V):
+    p, n = face_point(x, z, visor_offset(x, V))
+    return p, n
+
+
+def snap_to_skin(origin, direction, mannequin_name='MANIQUI_CUERPO', max_dist=400.0):
+    """Lanza un rayo contra la malla del maniqui y devuelve (punto, normal) de la piel, o None si no hay maniqui/impacto."""
+    from mathutils.bvhtree import BVHTree
+    o = bpy.data.objects.get(mannequin_name)
+    if o is None:
+        return None
+    dg = bpy.context.evaluated_depsgraph_get()
+    bvh = BVHTree.FromObject(o, dg)
+    loc, nrm, idx, dist = bvh.ray_cast(Vector(origin), Vector(direction).normalized(), max_dist)
+    return (loc, nrm) if loc is not None else None

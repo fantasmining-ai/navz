@@ -159,6 +159,7 @@ def build_all(acabado='cromo'):
         'pcb': plastic('PCB_VERDE_OSCURO', (0.01, 0.16, 0.09, 1), 0.5),
         'lipo': plastic('LIPO_FUNDA', (0.10, 0.16, 0.42, 1), 0.3),
         'cap_blue': plastic('CAP_MANGA_AZUL', (0.02, 0.07, 0.34, 1), 0.35),
+        'pad': plastic('EVA_PAD_NEGRO', (0.02, 0.02, 0.024, 1), 0.85, grain=0.12),
         'jst': plastic('CONECTOR_BLANCO', (0.82, 0.82, 0.78, 1), 0.5),
         'head': plastic('MANIQUI_ARCILLA', (0.30, 0.31, 0.33, 1) if acabado == 'cromo' else (0.82, 0.82, 0.84, 1), 0.55, grain=0.02),
     }

@@ -19,7 +19,6 @@ HOLES_ON = {   # pocos agujeros de montaje, en los tramos anchos
     'POSTE_SIEN': (0.5,),
     'BARRA_POSTERIOR_INFERIOR': (0.2, 0.8),
 }
-TIP_HOLES = (0.5,)   # fila de tres agujeros en la punta
 
 def _centerline(obj):
     a = list(obj['linea_central'])
@@ -48,11 +47,17 @@ def build():
                 for f in fr:
                     p, n = _at(pts, f)
                     specs.append(('cyl', tuple(p), tuple(n), r, 16.0))
-        if o.name.startswith('HORQUILLA_PUNTA'):
-            pts = _centerline(o)
-            for f in TIP_HOLES:
-                p, n = _at(pts, f)
-                specs.append(('cyl', tuple(p), tuple(n), rt, 14.0))
+    # Ranuras oculares del visor (48 x 12 mm), alineadas a las pupilas: cilindros solapados a lo largo de la ranura, normales al visor
+    from _eyeborg_core import visor_point
+    V = CONFIG['visor']; sl = V['slit']; rr = sl['height_mm'] / 2.0
+    for sgn in (1, -1):
+        x0 = sgn * sl['center_x_mm']; half = sl['length_mm'] / 2.0 - rr
+        k = 0
+        while k * 3.0 <= 2 * half + 1e-6:
+            xs = x0 - half + k * 3.0 if sgn > 0 else x0 + half - k * 3.0
+            p, n = visor_point(xs, sl['z_mm'], V)
+            specs.append(('cyl', tuple(p), (n.x, n.y, 0.0), rr, 14.0))
+            k += 1
     # Plataforma de camara: bolsa, ranura de cable, hilera frontal y esquinas traseras.
     cx, cy, cz = F['camera_plate_center_mm']
     px, py, pz = F['camera_plate_mm_xyz']

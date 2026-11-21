@@ -23,7 +23,7 @@ Este repositorio contiene el **modelo 3D paramétrico** (scripts de Blender), lo
 - [Antropometría verificada](#antropometría-verificada)
 - [Componentes electrónicos](#componentes-electrónicos)
 - [Parámetros CAD, holguras y fabricación](#parámetros-cad-holguras-y-fabricación)
-- [Ergonomía aplicada al modelo](#ergonomía-aplicada-al-modelo)
+- [Ajuste anatómico y ergonomía](#ajuste-anatómico-y-ergonomía)
 - [Control de calidad del modelo](#control-de-calidad-del-modelo)
 - [Arquitectura mecánica y modular](#arquitectura-mecánica-y-modular)
 - [Arquitectura de software y red](#arquitectura-de-software-y-red)
@@ -43,7 +43,7 @@ Este repositorio contiene el **modelo 3D paramétrico** (scripts de Blender), lo
 | --- | --- | --- | --- |
 | Archivo | [`modelos/EYEBORG.blend`](modelos/EYEBORG.blend) | [`modelos/EYEBORG_CABLEADO.blend`](modelos/EYEBORG_CABLEADO.blend) | [`modelos/EYEBORG_CABLEADO_MATE.blend`](modelos/EYEBORG_CABLEADO_MATE.blend) |
 | Acabado | Azul satinado, estudio claro | **Plata / cromo satinado** (ref. máscara de plata): metal neutro de rugosidad media con recesos oscuros por oclusión; estudio oscuro con softboxes y luces de borde suaves | **Resina SLA translúcida esmerilada** (sin cromo; ref. gafas de resina azul): transmisión parcial, grano fino, bordes pulidos; estudio claro con maniquí blanco |
-| Contenido | Exoesqueleto abierto de malla fusionada, plataforma de cámara con bolsa, agujeros de montaje, espinas de acento, maniquí anatómico esquemático | Diseño 1 **+** cableado discreto simulado por la cara interna de los rieles, conectores, capacitores, componentes, placa occipital de fibra de carbono en sarga, aluminio cepillado | Igual que el diseño 2, con la estructura en resina translúcida |
+| Contenido | **Visor inuit con ranuras sobre los ojos**, almohadillas de anclaje (nariz, frente, oreja), brazos de sien, corona abierta con cuernos y espinas, plataforma de cámara con bolsa, agujeros de montaje, maniquí anatómico esquemático | Diseño 1 **+** cableado discreto simulado por la cara interna de los rieles, conectores, capacitores, componentes, placa occipital de fibra de carbono en sarga, aluminio cepillado | Igual que el diseño 2, con la estructura en resina translúcida |
 | Uso | Evaluar forma, ergonomía y modularidad | Presentación estética y recorrido de cables | Presentación realista del producto impreso / acabado profesional |
 
 <table>
@@ -189,26 +189,23 @@ Reglas de fabricación: suavizar transiciones y **redondear puntas que puedan co
 
 ---
 
-## Ergonomía aplicada al modelo
+## Ajuste anatómico y ergonomía
 
-Sobre la base del expediente, el modelo incorpora comprobaciones automáticas ([`tools/check_ergonomia.py`](tools/check_ergonomia.py)):
+El ajuste a **ojos, nariz y orejas** se rediseñó a partir de una investigación con fuentes y una simulación de movimientos: [`docs/SPEC_AJUSTE_ANATOMICO.md`](docs/SPEC_AJUSTE_ANATOMICO.md) (diagnóstico, referencias, landmarks, requisitos medibles, resultados) y [`simulaciones/`](simulaciones/README.md) (cuello en 14 poses, hoja y animación).
 
-- **Holgura a la cabeza ≥ 6 mm** contra la envolvente elipsoidal verificada (165 × 202 × 215 mm). Cada correa se empuja automáticamente fuera del volumen de la cabeza.
-- **Corredor nasal libre** de ±20.5 mm (de la muesca nasal del V6) en la zona de la nariz.
-- **Ventana del oído** (68 × 52 mm) despejada.
-- **Plataforma y barra de cámara** desplazadas hacia delante de la frente.
+**Concepto:** un **visor curvo tipo lentes inuit** sobre los ojos, con **dos ranuras de 48 × 14 mm alineadas a las pupilas** (IPD 65 mm), anclado a la cara con **almohadillas EVA** (dorso nasal ×2, frente ×2, sobre el hélix de cada oreja) y **brazos de sien**. La nariz y la boca quedan libres; la corona abierta (diagonal con cuerno, rieles, espinas, placa occipital y plataforma de la ESP-CAM) va **encima**, sin cruzar la mirada.
 
-Resultado actual (medido sobre la malla final, [`tools/check_ergonomia.py`](tools/check_ergonomia.py)):
+| Comprobación (`tools/campo_visual.py`, `check_ergonomia.py`) | Antes | Ahora |
+| --- | --- | --- |
+| Campo visual central (±30°) bloqueado | 79 % | **30.5 %** |
+| **Ventana de la ranura** (±30° × ±12°) bloqueada | — | **1.0 %** |
+| Distancia estructura–córnea | — | **17.0 mm** (≥ 15) |
+| Anclajes con contacto real en la piel del maniquí | ninguno | **6 de 6** (0.0 mm) |
+| Vértices en la ventana de oreja (68 × 52 mm) / dentro de la cabeza / dentro del maniquí | 0 / 0 / 0 | **0 / 0 / 0** |
+| Holgura mínima a la piel (fuera de anclajes) | 6.2 mm | **5.9 mm** (objetivo 6; desviación de 0.1 mm en el riel superior trasero) |
+| Colisión con torso en 14 movimientos del cuello | ninguna | **ninguna** (mín. 21.8 mm; flexión hasta 60°, extensión 60°, giro 80°, inclinación 45°) |
 
-| Comprobación | Resultado |
-| --- | --- |
-| Vértices dentro del volumen de la cabeza | **0** |
-| Holgura mínima a la cabeza | **8.7 mm** (objetivo ≥ 6 mm) |
-| Vértices en la ventana del oído (68 × 52 mm) | **0** |
-| Vértices dentro del maniquí / holgura mínima a su piel | **0 / 6.2 mm** |
-| Vértices rozando el corredor nasal (±20.5 mm) | 4 (de 173 000) |
-
-> La envolvente de cabeza es un elipsoide, **no un escaneo**; los valores nasales son heredados y están pendientes de reconfirmar. El maniquí (rasgos faciales con ojos separados por la IPD de 65 mm, cuello de 380 mm de circunferencia, busto) es **esquemático**: no es un escaneo. Validar con prototipo de baja resolución.
+> **Límites honestos.** Los puntos de referencia anatómicos (landmarks) son **estimados de la literatura**, no medidos en la persona: hay que verificarlos con fotos o escaneo. El maniquí mejoró (rasgos con proporciones de literatura, ojos separados por la IPD, orejas de 60 × 31 mm) pero **sigue siendo esquemático**, no un escaneo ni una escultura realista. No se simularon expresiones faciales dinámicas ni la presión real en las almohadillas.
 
 ---
 
@@ -218,20 +215,20 @@ Auditoría estructural automática ([`tools/auditar.py`](tools/auditar.py)) y ch
 
 | Comprobación | Diseño 1 | Diseño 2 | Diseño 3 |
 | --- | --- | --- | --- |
-| Malla estructural (`EYEBORG_FUSION`) | 172 397 caras | 172 397 caras | 172 397 caras |
+| Malla estructural (`EYEBORG_FUSION`) | 131 389 caras | 131 389 caras | 131 389 caras |
 | Aristas no manifold / vértices sueltos / caras degeneradas | 0 / 0 / 0 | 0 / 0 / 0 | 0 / 0 / 0 |
 | Islas desconectadas | 1 (una sola pieza) | 1 | 1 |
-| Normales (volumen con signo positivo) | ✔ 249 cm³ | ✔ 249 cm³ | ✔ 249 cm³ |
-| Dimensiones (X × Y × Z) | 194 × 283 × 159 mm | 194 × 283 × 159 mm | 194 × 283 × 159 mm |
+| Normales (volumen con signo positivo) | ✔ 184 cm³ | ✔ 184 cm³ | ✔ 184 cm³ |
+| Dimensiones (X × Y × Z) | 193 × 283 × 137 mm | 193 × 283 × 137 mm | 193 × 283 × 137 mm |
 | Objetos duplicados `.001` / sin material | 0 / 0 | 0 / 0 | 0 / 0 |
-| Objetos / materiales / cámaras / luces | 76 / 6 / 1 / 2 | 114 / 21 / 4 / 6 | 112 / 21 / 4 / 4 |
-| Vértices dentro de la cabeza · holgura mínima | 0 · 8.7 mm | 0 · 8.7 mm | 0 · 8.7 mm |
-| Vértices dentro del maniquí · holgura a su piel | 0 · 6.2 mm | 0 · 6.2 mm | 0 · 6.2 mm |
-| Ventana de oreja / corredor nasal (vértices) | 0 / 4 | 0 / 4 | 0 / 4 |
-| Espesor de pared: mediana / p95 | 6.2 / 14.2 mm | 6.2 / 14.2 mm | 6.2 / 14.2 mm |
-| Muestras con espesor < 1.2 mm | 6.4 % (puntas de espina) | 6.4 % | 6.4 % |
+| Objetos / materiales / cámaras / luces | 88 / 6 / 1 / 2 | 126 / 22 / 4 / 6 | 124 / 22 / 4 / 4 |
+| Vértices dentro de la cabeza · holgura mínima | 0 · 8.4 mm | 0 · 8.4 mm | 0 · 8.4 mm |
+| Vértices dentro del maniquí · holgura a su piel | 0 · 5.9 mm | 0 · 5.9 mm | 0 · 5.9 mm |
+| Ventana de oreja (vértices) · distancia a la córnea | 0 · 17.0 mm | 0 · 17.0 mm | 0 · 17.0 mm |
+| Espesor de pared: mediana / p95 | 6.0 / 14.1 mm | 6.0 / 14.1 mm | 6.0 / 14.1 mm |
+| Muestras con espesor < 1.2 mm | 6.2 % (puntas de espina) | 6.2 % | 6.2 % |
 
-- **Peso:** el volumen de la estructura es de ≈ 249 cm³; como orden de magnitud, ≈ 0.31 kg si fuera macizo en PLA (1.24 g/cm³). Con paredes y relleno parcial será bastante menor. **Estimación, no validada.**
+- **Peso:** el volumen de la estructura es de ≈ 184 cm³; como orden de magnitud, ≈ 0.23 kg si fuera macizo en PLA (1.24 g/cm³). Con paredes y relleno parcial será bastante menor. **Estimación, no validada.**
 - **Puntas finas:** el ~6 % de espesor < 1.2 mm corresponde a las puntas de aguja de las espinas, por debajo de lo que imprime una boquilla estándar: redondearlas o engrosarlas antes de imprimir.
 - La malla es estanca (manifold), pero **no se ha probado en un laminador (slicer) ni impresa**.
 
@@ -286,7 +283,9 @@ Navy_Project/
 ├── vistas/                         # Imágenes de cada vista, con y sin maniquí
 │   ├── README.md                   #   Índice con miniaturas
 │   └── diseno_{1,2,3}/{con_maniqui,sin_maniqui}/
+├── simulaciones/                   # Simulación de movimientos del cuello (informe, poses, GIF)
 ├── docs/
+│   ├── SPEC_AJUSTE_ANATOMICO.md    # Investigación + spec del ajuste a ojos, nariz y orejas
 │   ├── INSTRUCCIONES.md            # Guía paso a paso Mac y Windows (desde git clone)
 │   ├── SPEC.md                     # Especificación del modelado
 │   ├── PLAN.md                     # Plan y estado
@@ -299,12 +298,14 @@ Navy_Project/
 │   ├── 00_construir_conjunto.py    #   Ensambla el diseño 1
 │   ├── 00_construir_cableado.py    #   Ensambla el diseño 2 (cromo) o 3 (mate)
 │   ├── 90_cotejo_dimensional.py    #   Cotejo de parámetros
-│   ├── eyeborg_part_01 … 14_*.py   #   Módulos por pieza
+│   ├── eyeborg_part_01 … 15_*.py   #   Módulos por pieza (15 = visor inuit)
 │   ├── _eyeborg_core.py / _eyeborg_materials.py / _eyeborg_studio.py
 │   └── eyeborg_config.json         #   Parámetros (medidas, holguras, espinas…)
 └── tools/                          # Control de calidad y renders
     ├── auditar.py                  #   Auditoría estructural de la malla
-    ├── check_ergonomia.py          #   Holgura a la cabeza, nariz, oído
+    ├── check_ergonomia.py          #   Holgura a la cabeza/maniquí, ojos, oído, anclajes
+    ├── campo_visual.py             #   Campo visual libre por las ranuras
+    ├── simulacion_movimientos.py   #   Cuello en 14 poses + equilibrio de masas
     ├── render_vistas.py            #   Genera vistas/ (con y sin maniquí)
     ├── compare_views.py            #   Compara el modelo con las referencias azules
     ├── hojas_contacto.py           #   Hojas resumen de vistas/ (requiere Pillow)
@@ -320,7 +321,6 @@ Navy_Project/
 | `ver_disenos.py` | **Visor**: carga los tres `.blend` lado a lado (punto de entrada para quien solo quiere mirar) |
 | `00_construir_conjunto.py` | Ensambla las colecciones `EYEBORG_00 … 14` (diseño 1) |
 | `00_construir_cableado.py` | Diseño 1 + cableado + materiales + estudio. Argumento `cromo` (diseño 2) o `mate` (diseño 3) |
-| `eyeborg_part_01_columna_frontal.py` | Punta con ranura y paredes internas |
 | `eyeborg_part_02_corona_y_puentes.py` | Barra de cámara y brazos |
 | `eyeborg_part_03_soporte_camara.py` | Pod de cámara y plataforma |
 | `eyeborg_part_04/05_rama_*.py` | Ramas izquierda / derecha (diagonal, rieles, abanico, espinas, nodos) |
@@ -332,6 +332,8 @@ Navy_Project/
 | `eyeborg_part_11_fusion.py` | Fusión orgánica de la estructura (voxel remesh + suavizado) |
 | `eyeborg_part_12_agujeros.py` | Agujeros de montaje y bolsa de la plataforma de cámara |
 | `eyeborg_part_13_cableado.py` | Cables, conectores y capacitores simulados |
+| `eyeborg_part_15_visor.py` | Visor inuit con ranuras, brazos de sien y gancho sobre la oreja |
+| `eyeborg_part_01_columna_frontal.py` | Anclajes centrales: almohadillas y puntales del puente nasal y la frente |
 | `eyeborg_part_14_maniqui.py` | Maniquí anatómico esquemático en una sola malla (cráneo, cejas, párpados, nariz, labios, mejillas, orejas, cuello, busto); se puede ocultar |
 | `90_cotejo_dimensional.py` | Imprime el cotejo de parámetros y estados |
 

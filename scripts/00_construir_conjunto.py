@@ -18,18 +18,19 @@ def load_module(filename, module_name):
 
 mods = [
   ('eyeborg_part_10_referencia_anatomica.py','eyeborg_ref'),
+  ('eyeborg_part_14_maniqui.py','eyeborg_maniqui'),
   ('eyeborg_part_01_columna_frontal.py','eyeborg_spine'),
   ('eyeborg_part_02_corona_y_puentes.py','eyeborg_crown'),
   ('eyeborg_part_03_soporte_camara.py','eyeborg_camera'),
   ('eyeborg_part_04_rama_izquierda.py','eyeborg_left'),
   ('eyeborg_part_05_rama_derecha.py','eyeborg_right'),
+  ('eyeborg_part_15_visor.py','eyeborg_visor'),
   ('eyeborg_part_06_modulo_occipital.py','eyeborg_occipital'),
   ('eyeborg_part_07_arcos_occipitales.py','eyeborg_rear_arches'),
   ('eyeborg_part_08_portacomponentes.py','eyeborg_carrier'),
   ('eyeborg_part_09_uniones_modulares.py','eyeborg_joints'),
   ('eyeborg_part_11_fusion.py','eyeborg_fusion'),
   ('eyeborg_part_12_agujeros.py','eyeborg_holes'),
-  ('eyeborg_part_14_maniqui.py','eyeborg_maniqui'),
 ]
 for filename, name in mods:
     mod = load_module(filename, name)

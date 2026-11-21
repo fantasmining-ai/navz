@@ -10,7 +10,7 @@ from _eyeborg_config import *
 
 """Fusion organica visual: une la estructura azul en una malla continua (como la referencia). No toca los originales."""
 FUSE = ['EYEBORG_01_COLUMNA_FRONTAL','EYEBORG_02_CORONA_PUENTES','EYEBORG_04_RAMA_IZQUIERDA',
-        'EYEBORG_04_RAMA_DERECHA','EYEBORG_06_OCCIPITAL','EYEBORG_07_ARCOS_POSTERIORES']
+        'EYEBORG_04_RAMA_DERECHA','EYEBORG_06_OCCIPITAL','EYEBORG_07_ARCOS_POSTERIORES','EYEBORG_15_VISOR']
 def build():
     from _eyeborg_core import fuse_objects
     cfg = CONFIG.get('fusion', {})
@@ -19,7 +19,7 @@ def build():
     objs = []
     for name in FUSE:
         c = bpy.data.collections.get(name)
-        if c: objs += [o for o in c.objects if o.type == 'MESH' and not o.name.startswith('REF_')]
+        if c: objs += [o for o in c.objects if o.type == 'MESH' and not o.name.startswith(('REF_', 'PAD_'))]
     cam = bpy.data.collections.get('EYEBORG_03_CAMARA')
     if cam: objs += [o for o in cam.objects if o.name.startswith('PLATAFORMA_')]
     fused = fuse_objects('EYEBORG_FUSION', objs, col, material=m['blue'],

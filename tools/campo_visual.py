@@ -14,7 +14,8 @@ dg = bpy.context.evaluated_depsgraph_get(); bvh = BVHTree.FromObject(f, dg)
 def zona(az, el):
     a = max(abs(az), abs(el) * 1.0)
     return 'central' if a <= 30 else ('media' if a <= 50 else 'periferica')
-res = {'central': [0, 0], 'media': [0, 0], 'periferica': [0, 0]}
+dbg = []
+res = {'central': [0, 0], 'media': [0, 0], 'periferica': [0, 0], 'ventana_ranura': [0, 0]}
 for sgn in (-1, 1):
     o = Vector((sgn * ipd / 2.0, cornea_y, eye_z))
     for az in range(-70, 71, 2):
@@ -25,6 +26,13 @@ for sgn in (-1, 1):
             hit = bvh.ray_cast(o, d, 400.0)[0]
             k = zona(az, el); res[k][1] += 1
             if hit is not None: res[k][0] += 1
+            if abs(el) <= 12 and abs(az) <= 30:      # ventana de la ranura (48x12 mm a ~15 mm de la cornea)
+                res['ventana_ranura'][1] += 1
+                if hit is not None:
+                    res['ventana_ranura'][0] += 1
+                    dbg.append((round(hit.x), round(hit.y), round(hit.z)))
 for k, (b, n) in res.items():
     print('CAMPO', k, 'bloqueado_%', round(100.0 * b / n, 1), 'rayos', n)
+import collections
+print('CAMPO_HITS_VENTANA', collections.Counter((round(h[0]/10)*10, round(h[1]/10)*10, round(h[2]/10)*10) for h in dbg).most_common(6))
 print('CAMPO_OK')

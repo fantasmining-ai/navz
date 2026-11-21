@@ -6,8 +6,8 @@ Cinemática de dos articulaciones (suboccipital + cervical inferior) con rangos 
 | --- | --- | --- | --- | --- | --- | --- |
 | neutra | 0° | 0° | 0° | 51.2 | JACK_AUDIO_PUNTA | ✔ |
 | flexion_30_lectura | 30° | 0° | 0° | 50.9 | JACK_AUDIO_PUNTA | ✔ |
-| flexion_50 | 50° | 0° | 0° | 60.5 | EYEBORG_FUSION | ✔ |
-| flexion_60 | 60° | 0° | 0° | 57.2 | EYEBORG_FUSION | ✔ |
+| flexion_50 | 50° | 0° | 0° | 62.9 | JACK_AUDIO_PUNTA | ✔ |
+| flexion_60 | 60° | 0° | 0° | 72.3 | EYEBORG_FUSION | ✔ |
 | extension_30 | -30° | 0° | 0° | 41.5 | JACK_AUDIO_PUNTA | ✔ |
 | extension_45 | -45° | 0° | 0° | 33.8 | JACK_AUDIO_PUNTA | ✔ |
 | extension_60 | -60° | 0° | 0° | 21.8 | JACK_AUDIO_PUNTA | ✔ |
@@ -28,8 +28,8 @@ Par = masa·g·brazo horizontal (+ = tiende a extender la cabeza hacia atrás; �
 
 | Pose | Cabeza sola (N·m) | Cabeza + equipo (N·m) | Equipo solo (N·m) |
 | --- | --- | --- | --- |
-| neutra | -0.71 | -0.71 | -0.01 |
-| flexion_30 | -4.16 | -4.29 | -0.14 |
-| extension_30 | 2.97 | 3.09 | 0.12 |
+| neutra | -0.71 | -0.69 | 0.01 |
+| flexion_30 | -4.16 | -4.28 | -0.12 |
+| extension_30 | 2.97 | 3.12 | 0.15 |
 
 **Masa total del equipo:** 155 g (estructura 90 + pod/ESP32-CAM 25 + bandeja/componentes 40) — estimación.
