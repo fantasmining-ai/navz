@@ -17,6 +17,8 @@ No son una malla fuente: el modelo es una **reconstrucción paramétrica** a par
 | `est_10_plata_satinada_mascara.png` | **Referencia del diseño 2**: plata satinada con recesos oscuros. |
 | `est_11` / `est_12` (maniquí con resina azul translúcida) | **Referencia del diseño 3** (resina esmerilada) y del **maniquí** (cabeza con rasgos reales). |
 | `est_13` / `est_14` (cromo sobre maniquí) | Referencia de reflejos del cromo y de la presencia del maniquí. |
+| `est_15_filigrana_sobre_rostro_realista.png` | Realismo del maniquí y ajuste de la filigrana a pómulo y sien. |
+| *Referencias de ojos (solo locales, no versionadas)* | **Lentes inuit** (banda con ranuras), **gafas cromadas con espinas** y **visor con filigrana**: base del visor del diseño. Contienen rostros reales; están en `references/privadas_local/` (ignorada por git). |
 
 > Las imágenes de `estetica/` son **material de inspiración de terceros** recopilado de internet. **Pertenecen a sus autores** y no se ofrecen bajo la licencia del proyecto. Si eres autor y deseas que se retire alguna, abre un *issue*.
 > Se excluyeron deliberadamente fotos con rostros de personas reales.

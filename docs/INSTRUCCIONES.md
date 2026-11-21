@@ -71,7 +71,7 @@ Elige **una** de las dos opciones. **La opción A es la más fácil.**
 3. Cuando termine:
    - **Mac:** haz doble clic en el ZIP (se descomprime solo) y mueve la carpeta `Navy_Project-main` a **Documentos**.
    - **Windows:** clic derecho en el ZIP → **Extraer todo…** → elige **Documentos** → **Extraer**.
-4. Apunta la ubicación: la carpeta debe quedar como `Documentos/Navy_Project-main` y dentro verás `scripts`, `modelos`, `docs`…
+4. Apunta la ubicación: la carpeta debe quedar como `Documentos/Navy_Project-main` y dentro verás `scripts`, `modelos`, `vistas`, `docs`…
 
 Salta a [3. Abrir los diseños con el script](#3-abrir-los-diseños-con-el-script).
 
@@ -111,7 +111,7 @@ Salta a [3. Abrir los diseños con el script](#3-abrir-los-diseños-con-el-scrip
    ls
    ```
 
-   Debes ver: `README.md  docs  modelos  references  scripts  tools  vistas`.
+   Debes ver: `README.md  assets  docs  modelos  references  scripts  simulaciones  tools  vistas`.
 
 #### Windows
 
@@ -147,7 +147,7 @@ Salta a [3. Abrir los diseños con el script](#3-abrir-los-diseños-con-el-scrip
    dir
    ```
 
-   (En Git Bash usa `ls`). Debes ver: `README.md  docs  modelos  references  scripts  tools  vistas`.
+   (En Git Bash usa `ls`). Debes ver: `README.md  assets  docs  modelos  references  scripts  simulaciones  tools  vistas`.
 
 > **No necesitas cuenta de GitHub ni llaves SSH.** Si te pidiera usuario y contraseña, avisa a quien te pasó el proyecto: puede que el repositorio sea privado y haya que darte acceso.
 

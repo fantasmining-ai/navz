@@ -1,55 +1,62 @@
-# EYEBORG — Spec de modelado Blender (rev. 2026-11-20)
+# EYEBORG — Spec de modelado Blender (rev. 2026-11-20, v4)
 
-Fuente: `EYEBORG_Expediente_Tecnico_Equipo.pdf` (26 págs). Este spec cubre solo la parte **modelo 3D vía Blender + MCP**.
-Electrónica, firmware y red quedan documentados en el PDF; no se tocan aquí.
+Fuente: `EYEBORG_Expediente_Tecnico_Equipo.pdf` (26 págs). Este spec cubre la parte **modelo 3D paramétrico en Blender**.
+Electrónica, firmware y red están en el expediente y en el README; el **ajuste anatómico** (ojos, nariz, orejas) tiene su propio spec:
+[`SPEC_AJUSTE_ANATOMICO.md`](SPEC_AJUSTE_ANATOMICO.md).
 
 ## 1. Objetivo
-Generar en Blender 4.x, de forma reproducible y paramétrica, el exoesqueleto orgánico azul abierto de EYEBORG
-(colecciones `EYEBORG_00..14` y `EYEBORG_20_CABLEADO`), a partir de los scripts del Anexo A y `eyeborg_config.json`, ejecutándolos
-a través del MCP de Blender, y validar visualmente contra las 8 vistas de referencia.
+Generar en Blender 5.x, de forma reproducible y paramétrica, el exoesqueleto orgánico abierto de EYEBORG en **tres diseños**
+(estructura / cromo satinado + cableado / resina translúcida + cableado), con maniquí de referencia, y validarlo con herramientas medibles
+(auditoría de malla, ergonomía contra la piel del maniquí, campo visual, simulación de movimientos y de proporciones).
 
 ## 2. Entregables
 | # | Entregable | Estado |
 |---|-----------|--------|
-| 1 | `scripts/*.py` + `scripts/eyeborg_config.json` | Hecho |
-| 2 | Blender 5.1.2 + MCP headless | Hecho |
-| 3 | `modelos/EYEBORG.blend` (diseño 1) | Hecho |
-| 4 | `modelos/EYEBORG_CABLEADO.blend` (diseño 2) | Hecho |
-| 5 | Renders y comparación con referencias (`docs/img/`) | Hecho |
-| 6 | Cotejo ergonómico (`tools/check_ergonomia.py`) | Hecho (elipsoide, no escaneo) |
-| 7 | Export STL por módulo | Pendiente / opcional |
+| 1 | `scripts/*.py` (módulos 01-15, núcleo, materiales, estudio) + `eyeborg_config.json` | Hecho |
+| 2 | `modelos/EYEBORG.blend` (diseño 1: estructura) | Hecho |
+| 3 | `modelos/EYEBORG_CABLEADO.blend` (diseño 2: cromo satinado + cableado) | Hecho |
+| 4 | `modelos/EYEBORG_CABLEADO_MATE.blend` (diseño 3: resina translúcida + cableado) | Hecho |
+| 5 | `vistas/`: 9 vistas por diseño con y sin maniquí + rayos X del cableado (58 imágenes) | Hecho |
+| 6 | `assets/maniqui/`: cabeza base CC0 (Blender Studio) ajustada a las medidas | Hecho |
+| 7 | Herramientas de verificación (`tools/`): auditoría, ergonomía, campo visual, simulaciones | Hecho |
+| 8 | `simulaciones/`: movimiento del cuello (14 poses) y proporciones (11 variantes) | Hecho |
+| 9 | Visor para tercero (`scripts/ver_disenos.py`) y guía Mac/Windows (`docs/INSTRUCCIONES.md`) | Hecho |
+| 10 | Export STL por módulo | Pendiente / opcional |
 
-## 3. Restricciones no negociables (del PDF)
+## 3. Restricciones (del expediente, con la revisión v3)
 - Unidades: 1 unidad Blender = 1 mm. Ejes: frente −Y, atrás +Y, arriba +Z, lado izquierdo del usuario +X.
-- **Preservar silueta abierta**: horquilla frontal con ranura central, 2 ramas principales, ramas secundarias con ventanas, arcos de corona, puentes, placa occipital. No cerrar ni rellenar.
+- **Silueta abierta:** ramas, rieles, cuernos, espinas, ventanas y placa occipital; no cerrar ni rellenar. *(La horquilla frontal con ranura central fue sustituida por el visor con ranuras para ajustar a ojos y nariz.)*
 - Electrónica se adapta a la estructura (pods/bandejas extraíbles), nunca al revés.
-- Antropometría verificada (cabeza 570 mm, envolvente 165×202×215, IPD 65, cuello 380, lentes 140): no reinterpretar “curvatura 27×35.5” ni “mandíbula 25” como radios/perímetros.
-- Mantener etiquetas PROVISIONAL / PENDIENTE; el modelo es **blockout**, no apto para imprimir sin validar ajuste.
-- Conflicto de cámara abierto: caja V6 41.5×28×14.5 vs módulo actual 40×28×29 (pod blockout 46×34×35).
-- Objetos `REF_*` = referencias, ocultar antes de exportar.
+- Antropometría verificada por el usuario: cabeza 570 mm, envolvente 165 × 202 × 215, **IPD 65**, nariz 35, cuello 380, lentes 140. No reinterpretar “curvatura” ni “mandíbula”.
+- Mantener etiquetas PROVISIONAL / PENDIENTE; el modelo es **blockout validado geométricamente**, no producto.
+- Conflicto de cámara abierto: caja V6 41.5 × 28 × 14.5 vs módulo actual 40 × 28 × 29 (pod blockout 46 × 34 × 35).
+- Objetos `REF_*` y `MANIQUI_*` son referencias: ocultar antes de exportar STL.
 
 ## 4. Arquitectura de código
-`00_construir_conjunto.py` (entrada) → carga 10 módulos `eyeborg_part_NN_*.py` → comparten `_eyeborg_core.py`
-(sweep_ribbon, box_part, torus_part, catmull_rom, materiales) y `_eyeborg_config.py` (lee JSON). `90_cotejo_dimensional.py` imprime estado.
+`00_construir_conjunto.py` (diseño 1) → módulos en este orden: 10 referencia · **14 maniquí** (malla CC0 o procedural) · 01 anclajes centrales ·
+02 barra de cámara · 03 cámara · 04/05 ramas · **15 visor y brazos** · 06 occipital · 07 barra posterior · 08 bandeja · 09 uniones ·
+11 fusión orgánica · 12 agujeros, ranuras y bolsa. `00_construir_cableado.py` añade el módulo 13 (cableado), materiales y estudio y admite `cromo` o `mate`.
+Comparten `_eyeborg_core.py` (correas, nodos, espinas, fusión, ergonomía contra la piel), `_eyeborg_materials.py`, `_eyeborg_studio.py` y `eyeborg_config.json`.
 
-## 5. Estrategia MCP
-- Servidor: `blender-mcp` (uvx) + addon en Blender (socket TCP, puerto 9876 por defecto).
-- El MCP ejecuta código en el proceso de Blender: usar `exec` de `00_construir_conjunto.py` con `__file__` definido
-  (o `bpy.ops.script.python_file_run`) para que las importaciones relativas funcionen.
-- Verificación por MCP: listar colecciones/objetos, conteo de objetos, dimensiones totales, screenshot de viewport desde cámaras alineadas a las 8 vistas.
+## 5. Entorno
+- Blender 5.1.2. Los scripts se ejecutan en modo *headless* (`blender -b … -P …`); para desarrollo se usó el MCP local `fnf-blender-mcp` (sin addon ni socket), no versionado (`.mcp.json`).
+- Lanzadores y utilidades: ver [`README.md`](../README.md#estructura-del-repositorio).
 
-## 6. Criterios de aceptación
-1. `00_construir_conjunto.py` termina sin excepciones en Blender 4.x.
-2. Existen colecciones `EYEBORG_00..09` con objetos no vacíos.
-3. Bounding box del conjunto estructural coherente con la envolvente de cabeza + holguras (≈165×202×215 mm + 6 mm).
-4. Revisión visual: ranura frontal abierta, ventanas en ramas, arcos de corona y placa occipital reconocibles frente a vistas 01–08.
-5. Cotejo dimensional impreso y sin valores fuera de `eyeborg_config.json`.
-6. Reporte honesto de lo no verificable (manifold, impresión, ajuste anatómico).
+## 6. Criterios de aceptación (estado actual)
+1. Los scripts terminan sin excepciones en Blender 5.x y reproducen los tres `.blend`. ✔
+2. Malla estructural manifold y de una sola pieza (`tools/auditar.py`). ✔
+3. Holgura a la piel del maniquí ≥ 6 mm fuera de anclajes (`check_ergonomia.py`): **7.9 mm**. ✔
+4. Campo libre por las ranuras (`campo_visual.py`): ventana bloqueada **4.2 %** (umbral ≤ 5 %). ✔
+5. Anclajes con contacto real: **6 de 6**. ✔
+6. Sin colisión con el torso en 14 movimientos del cuello (`simulacion_movimientos.py`). ✔
+7. Tolerancia a distintas cabezas (`simulacion_proporciones.py`): ≈ −6 %…+3 % ancho, −5 %…+2 % largo, IPD 58-68 mm; más rango requiere tallas S/M/L. ⚠ parcial
+8. Revisión visual frente a las referencias (`docs/img/comparacion_referencia_vs_modelo.png`, `references/`). ✔ (silueta frontal cambiada a propósito)
 
 ## 7. Riesgos
 | Riesgo | Mitigación |
-|--------|-----------|
-| Código solo probado con AST, nunca en Blender (el PDF lo dice) | Ejecutar por módulo, corregir errores de API 4.x iterativamente |
-| Reconstrucción por vistas, sin malla original → fidelidad limitada | Aceptar blockout; iterar rutas de `sweep_ribbon` contra capturas |
-| Extracción desde PDF pudo alterar indentación (se corrigió `_eyeborg_core.py` ~l.70) | Revisar diff lógico; el PDF recomienda usar el repo original si existe |
-| Ejecutar código por MCP es ejecución arbitraria en Blender | Solo código del propio proyecto, revisado |
+| --- | --- |
+| Reconstrucción por vistas, sin malla original → fidelidad limitada | Aceptar blockout; iterar trayectorias contra las capturas |
+| Landmarks derivados de una cabeza genérica escalada, no de la persona | Verificar con fotos/escaneo; ancho craneal ~157 mm vs envolvente 165 mm por aclarar |
+| Espinas y puntas finas (6 % de la malla < 1.2 mm) | Redondear puntas al imprimir; offset ≥ 8 mm de ojos y mejillas |
+| Cableado es simulación visual | No energizar; ver README, sección de cableado |
+| Sin impresión ni laminador probados | Probeta de tolerancias y prototipo económico |

@@ -6,7 +6,7 @@ Sistema vestible de estructura **abierta y ramificada** que integra cámara (ESP
 Este repositorio contiene el **modelo 3D paramétrico** (scripts de Blender), los **dos diseños** generados, las **referencias visuales** y la documentación derivada del *Expediente Técnico Integral* (rev. 20 de noviembre de 2026).
 
 <p align="center">
-  <img src="vistas/diseno_2/con_maniqui/07_isometrica_frontal.jpg" alt="EYEBORG diseño 2: estructura de cromo azul con cableado discreto" width="860">
+  <img src="vistas/diseno_2/con_maniqui/07_isometrica_frontal.jpg" alt="EYEBORG diseño 2: visor de cromo satinado con cableado discreto" width="860">
 </p>
 
 > **Principio rector:** preservar la arquitectura abierta y ramificada de las ocho referencias azules. La integración electrónica se adapta a la estructura; no la convierte en una carcasa cerrada ni altera su silueta.
@@ -118,9 +118,11 @@ cd Navy_Project
 
 ## Criterios de diseño
 
+> **Revisión de ajuste anatómico (v3-v4).** Los rasgos de abajo son los del expediente original. Al medir el ajuste a ojos y nariz, la **horquilla frontal con ranura central y las diagonales de abanico fueron sustituidas por un visor tipo lentes inuit** (con ranuras para los ojos y anclajes), porque cruzaban la mirada (79 % del campo central bloqueado). Se conservan las ramas, rieles, cuernos, espinas, la corona abierta, la placa occipital y la plataforma de cámara. Ver [`docs/SPEC_AJUSTE_ANATOMICO.md`](docs/SPEC_AJUSTE_ANATOMICO.md).
+
 Rasgos **obligatorios** a preservar (del expediente):
 
-- Horquilla frontal inferior con abertura longitudinal central; no convertirla en una placa maciza.
+- Horquilla frontal inferior con abertura longitudinal central; no convertirla en una placa maciza. *(Sustituida por el visor con ranuras; ver nota.)*
 - Dos ramas principales anchas que ascienden desde el vértice frontal hacia sienes y corona.
 - Ramas laterales secundarias y ventanas alargadas, de lenguaje orgánico tipo nervadura ósea.
 - Arcos superiores ascendentes con puntas redondeadas/afiladas, integrados a la estructura.
@@ -330,7 +332,7 @@ Navy_Project/
 | `00_construir_cableado.py` | Diseño 1 + cableado + materiales + estudio. Argumento `cromo` (diseño 2) o `mate` (diseño 3) |
 | `eyeborg_part_02_corona_y_puentes.py` | Barra de cámara y brazos |
 | `eyeborg_part_03_soporte_camara.py` | Pod de cámara y plataforma |
-| `eyeborg_part_04/05_rama_*.py` | Ramas izquierda / derecha (diagonal, rieles, abanico, espinas, nodos) |
+| `eyeborg_part_04/05_rama_*.py` | Ramas izquierda / derecha (diagonal con cuerno, rieles, alas y espinas de acento, nodos) |
 | `eyeborg_part_06_modulo_occipital.py` | Placa occipital |
 | `eyeborg_part_07_arcos_occipitales.py` | Barra posterior |
 | `eyeborg_part_08_portacomponentes.py` | Bandeja y volúmenes de componentes |
@@ -360,7 +362,7 @@ Los objetos `REF_*` son **referencias dimensionales**, no piezas de impresión: 
 | Área | Pendiente |
 | --- | --- |
 | Antropometría | Definir recorrido de “curvatura 27 × 35.5 cm” y “mandíbula 25 cm”; comparar la envolvente con el usuario |
-| Ergonomía | Visión periférica, respiración, acceso a ojos, retirada rápida; prototipo económico de la horquilla y ramas |
+| Ergonomía | Visión periférica, respiración, acceso a ojos, retirada rápida; prototipo económico del visor, las almohadillas y las ramas |
 | Mecánica | Seleccionar tornillos/insertos; confirmar que no toca orejas ni comprime la LiPo |
 | Electrónica | Medir cada módulo; resolver variante TP4056; medir picos y temperaturas; rieles, protección y calibre de cables; **definir capacitancias** |
 | Audio | Asignar GPIO I2S tras revisar el sketch completo de la cámara |

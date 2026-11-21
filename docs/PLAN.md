@@ -1,34 +1,31 @@
 # EYEBORG — Plan y estado
 
-Ver [`SPEC.md`](SPEC.md) para alcance y criterios.
+Alcance y criterios: [`SPEC.md`](SPEC.md) y [`SPEC_AJUSTE_ANATOMICO.md`](SPEC_AJUSTE_ANATOMICO.md).
 
 ## Hecho
-- [x] Extracción del código y la configuración del expediente a `scripts/` (sintaxis y ejecución verificadas en Blender 5.1.2).
-- [x] Reconstrucción de la estructura desde un esqueleto 3D medido sobre las 8 vistas azules (diagonales, rieles, abanico, poste de sien, cuernos).
-- [x] Fusión orgánica, plataforma de cámara con bolsa, agujeros de montaje, espinas de acento y nodos de unión.
-- [x] Ergonomía: holgura ≥ 6 mm a la cabeza, corredor nasal, ventana de oído (`tools/check_ergonomia.py`).
-- [x] Diseño 2: cableado discreto simulado, componentes, capacitores (valores por definir), materiales procedurales y estudio de iluminación.
-- [x] Visor `scripts/ver_disenos.py` y guía `docs/INSTRUCCIONES.md` (Mac y Windows).
-- [x] Auditoría estructural (`tools/auditar.py`): malla estanca, una sola pieza; maniquí esquemático.
-- [x] Diseño 2 en cromo satinado (referencia: máscara de plata; estudio con softboxes y tiras de luz) y diseño 3 en resina translúcida esmerilada sin cromo (referencia: gafas de resina azul; grano fino, bordes pulidos, carbono en sarga, aluminio cepillado). Maniquí anatómico esquemático con rasgos faciales.
-- [x] Galería `vistas/`: 9 vistas con y sin maniquí por diseño + rayos X del cableado.
-- [x] Repositorio reorganizado (`modelos/`, `vistas/`, `tools/dev/`).
-
-- [x] Ajuste anatómico (spec + investigación con fuentes + simulación de movimientos): visor inuit con ranuras alineadas a las pupilas, anclajes (nariz, frente, oreja), campo visual y distancias medidas.
+- [x] Código y configuración del expediente extraídos a `scripts/` y ejecutados en Blender 5.1.2.
+- [x] Estructura reconstruida desde las 8 vistas azules, fusión orgánica, plataforma de cámara con bolsa, agujeros de montaje, espinas de acento y nodos.
+- [x] **Tres diseños:** 1 estructura (azul satinado) · 2 cromo satinado + cableado · 3 resina translúcida + cableado, con estudio de iluminación propio.
+- [x] Cableado discreto simulado (potencia, I2S, audio), conectores y capacitores (valores por definir). *No es un plano de cableado.*
+- [x] **Ajuste anatómico:** investigación con fuentes, spec, visor inuit con ranuras alineadas a las pupilas, 6 anclajes (nariz, frente, oreja), brazos de sien.
+- [x] **Maniquí con malla base CC0** (Blender Studio) escalada a las medidas verificadas; ergonomía medida contra la piel real.
+- [x] Auditoría (`tools/auditar.py`), ergonomía (`check_ergonomia.py`), campo visual (`campo_visual.py`).
+- [x] Simulación de movimientos del cuello (14 poses) y de proporciones (11 variantes) en `simulaciones/`.
+- [x] Galería `vistas/` (58 imágenes con y sin maniquí), visor `ver_disenos.py` y guía Mac/Windows.
+- [x] Repositorio ordenado (`modelos/`, `vistas/`, `assets/`, `simulaciones/`, `tools/dev/`).
 
 ## Pendiente
-- [x] Maniquí con malla base CC0 (Blender Studio), escalada a las medidas; ergonomía medida contra la piel real.
-- [x] Simulación de proporciones (tolerancia del diseño a distintas cabezas e IPD).
-- [ ] Verificar landmarks con fotos/escaneo de la persona (el ancho craneal escalado ~157 mm no coincide con 165 mm).
-- [ ] Tallas S/M/L y almohadillas ajustables (conclusión de la simulación de proporciones).
-- [ ] F6: simulación facial dinámica (expresiones) y presión en almohadillas.
+- [ ] Verificar landmarks con fotos/escaneo de la persona; aclarar el ancho de 165 mm de la envolvente (el craneo escalado mide ~157 mm).
+- [ ] Tallas S/M/L generadas del mismo script y almohadillas ajustables (conclusión de la simulación de proporciones).
+- [ ] F6: simulación facial dinámica (expresiones) y presión real en almohadillas.
+- [ ] Reducir el bloqueo de la ranura por los puntales del puente nasal (hoy 4.2 %).
 - [ ] Reconfirmar medidas nasales y de oído heredadas; definir recorrido de “curvatura” y “mandíbula”.
-- [ ] Validar holguras con prototipo de baja resolución; escaneo 3D de cabeza si es posible.
 - [ ] Elegir tornillería/insertos y fijar el patrón final de agujeros.
 - [ ] Medir módulos reales; resolver TP4056 y capacidad de la LiPo; asignar GPIO I2S; definir capacitancias.
-- [ ] Revisión de manifold/espesores y redondeo de puntas antes de imprimir.
+- [ ] Revisión en laminador (espesores, puntas) y prototipo de baja resolución.
+- [ ] Envío de imágenes y archivos al contacto (pendiente de conectar la extensión de Chrome).
 - [ ] Licencia del proyecto.
 
 ## Entorno de desarrollo (opcional)
-- Blender 5.1.2 en modo *headless*; MCP `fnf-blender-mcp` registrado localmente (no se versiona `.mcp.json`).
-- Herramientas: `tools/render_views.py`, `tools/compare_views.py`, `tools/render_detail.py`, `tools/render_cableado.py`, `tools/check_ergonomia.py`.
+- Blender 5.1.2 *headless*; MCP local `fnf-blender-mcp` (no versionado).
+- Herramientas: `auditar.py`, `check_ergonomia.py`, `campo_visual.py`, `simulacion_movimientos.py`, `simulacion_proporciones.py`, `render_vistas.py`, `compare_views.py`, `hojas_contacto.py`, `ensamblar_simulacion.py`, `limpiar_blend.py`, `extraer_base_cc0.py`; utilidades en `tools/dev/`.
