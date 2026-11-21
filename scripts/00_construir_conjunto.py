@@ -29,6 +29,7 @@ mods = [
   ('eyeborg_part_09_uniones_modulares.py','eyeborg_joints'),
   ('eyeborg_part_11_fusion.py','eyeborg_fusion'),
   ('eyeborg_part_12_agujeros.py','eyeborg_holes'),
+  ('eyeborg_part_14_maniqui.py','eyeborg_maniqui'),
 ]
 for filename, name in mods:
     mod = load_module(filename, name)

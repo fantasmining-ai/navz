@@ -5,7 +5,7 @@ Electrónica, firmware y red quedan documentados en el PDF; no se tocan aquí.
 
 ## 1. Objetivo
 Generar en Blender 4.x, de forma reproducible y paramétrica, el exoesqueleto orgánico azul abierto de EYEBORG
-(colecciones `EYEBORG_00..13` y `EYEBORG_20_CABLEADO`), a partir de los scripts del Anexo A y `eyeborg_config.json`, ejecutándolos
+(colecciones `EYEBORG_00..14` y `EYEBORG_20_CABLEADO`), a partir de los scripts del Anexo A y `eyeborg_config.json`, ejecutándolos
 a través del MCP de Blender, y validar visualmente contra las 8 vistas de referencia.
 
 ## 2. Entregables
@@ -13,8 +13,8 @@ a través del MCP de Blender, y validar visualmente contra las 8 vistas de refer
 |---|-----------|--------|
 | 1 | `scripts/*.py` + `scripts/eyeborg_config.json` | Hecho |
 | 2 | Blender 5.1.2 + MCP headless | Hecho |
-| 3 | `output/EYEBORG.blend` (diseño 1) | Hecho |
-| 4 | `output/EYEBORG_CABLEADO.blend` (diseño 2) | Hecho |
+| 3 | `modelos/EYEBORG.blend` (diseño 1) | Hecho |
+| 4 | `modelos/EYEBORG_CABLEADO.blend` (diseño 2) | Hecho |
 | 5 | Renders y comparación con referencias (`docs/img/`) | Hecho |
 | 6 | Cotejo ergonómico (`tools/check_ergonomia.py`) | Hecho (elipsoide, no escaneo) |
 | 7 | Export STL por módulo | Pendiente / opcional |

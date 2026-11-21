@@ -1,5 +1,5 @@
 """Auditoria estructural de un .blend EYEBORG.
-Uso: blender -b output/EYEBORG.blend -P tools/auditar.py   (imprime un informe 'AUD ...')"""
+Uso: blender -b modelos/EYEBORG.blend -P tools/auditar.py   (imprime un informe 'AUD ...')"""
 import bpy, bmesh, math, random, re
 from mathutils import Vector
 from mathutils.bvhtree import BVHTree

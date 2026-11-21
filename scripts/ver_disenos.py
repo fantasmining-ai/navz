@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
-"""EYEBORG - Visor de los dos diseños en Blender (macOS, Windows y Linux).
+"""EYEBORG - Visor de los tres diseños en Blender (macOS, Windows y Linux).
 
 Muestra lado a lado:
-  * DISEÑO 1  -> estructura exoesqueletica (output/EYEBORG.blend)
-  * DISEÑO 2  -> estructura + cableado discreto + materiales (output/EYEBORG_CABLEADO.blend)
+  * DISEÑO 1  -> estructura exoesqueletica, acabado azul satinado (modelos/EYEBORG.blend)
+  * DISEÑO 2  -> estructura en cromo satinado + cableado discreto + materiales (modelos/EYEBORG_CABLEADO.blend)
+  * DISEÑO 3  -> igual que el 2 pero en resina translucida esmerilada, sin cromo (modelos/EYEBORG_CABLEADO_MATE.blend)
 
 COMO USARLO (resumen; el detalle esta en docs/INSTRUCCIONES.md):
   1. Abre Blender 5.1 (o superior).
@@ -16,16 +17,17 @@ import os
 import bpy
 
 # ----------------------------- configuracion -----------------------------
-SEPARACION_MM = 250.0     # distancia entre diseños (el modelo mide ~190 x 275 x 175 mm)
+SEPARACION_MM = 270.0     # distancia entre diseños (cada modelo mide ~194 x 283 x 159 mm)
 ARCHIVOS = (
-    ('DISENO_1', 'DISEÑO 1', 'EYEBORG.blend', -SEPARACION_MM / 2.0),
-    ('DISENO_2', 'DISEÑO 2 - CABLEADO', 'EYEBORG_CABLEADO.blend', SEPARACION_MM / 2.0),
+    ('DISENO_1', 'DISEÑO 1 - ESTRUCTURA', 'EYEBORG.blend', -SEPARACION_MM),
+    ('DISENO_2', 'DISEÑO 2 - CROMO SATINADO + CABLEADO', 'EYEBORG_CABLEADO.blend', 0.0),
+    ('DISENO_3', 'DISEÑO 3 - RESINA TRANSLUCIDA + CABLEADO', 'EYEBORG_CABLEADO_MATE.blend', SEPARACION_MM),
 )
 MARCA = 'eyeborg_visor'
 
 
 def _raiz_repo():
-    """Carpeta raiz del repositorio (la que contiene 'output' y 'scripts')."""
+    """Carpeta raiz del repositorio (la que contiene 'modelos' y 'scripts')."""
     try:
         ruta = os.path.abspath(__file__)
     except NameError:                      # al ejecutar desde el editor de texto
@@ -105,12 +107,12 @@ def main():
     esc.unit_settings.length_unit = 'MILLIMETERS'
     _limpiar()
     for clave, titulo, archivo, dx in ARCHIVOS:
-        padre, n = _importar(os.path.join(raiz, 'output', archivo), clave, dx)
+        padre, n = _importar(os.path.join(raiz, 'modelos', archivo), clave, dx)
         _etiqueta(titulo, dx)
         print('EYEBORG: %s cargado (%d objetos) desde %s' % (titulo, n, archivo))
     _vista()
     print('EYEBORG: listo. Rueda = zoom, boton central = girar, Shift+boton central = mover. '
-          'Para ver el diseño 2 con luces de estudio abre output/EYEBORG_CABLEADO.blend y pulsa Z -> Rendered.')
+          'Para ver el diseño 2 o 3 con luces de estudio abre su archivo en modelos/ y pulsa Z -> Rendered.')
 
 
 main()

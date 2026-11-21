@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Diseño 2: EYEBORG con cableado discreto simulado + materiales + estudio. Uso:
-blender -b --factory-startup -P scripts/00_construir_cableado.py -- salida.blend"""
+blender -b --factory-startup -P scripts/00_construir_cableado.py -- salida.blend [cromo|mate]"""
 import os, sys, runpy
 ROOT = os.path.dirname(os.path.abspath(__file__))
 if ROOT not in sys.path:
@@ -17,9 +17,14 @@ for _n in ('Cube', 'Light', 'Camera'):
     _o = bpy.data.objects.get(_n)
     if _o: bpy.data.objects.remove(_o, do_unlink=True)
 from _eyeborg_studio import assign_materials, studio
-M = build_all()
+_args = sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else []
+acabado = _args[1] if len(_args) > 1 else 'cromo'      # 'cromo' (diseño 2) | 'mate' (diseño 3)
+M = build_all(acabado)
 assign_materials(M)
-studio(M)
-out = sys.argv[sys.argv.index('--') + 1] if '--' in sys.argv else os.path.join(ROOT, '..', 'output', 'EYEBORG_CABLEADO.blend')
+studio(M, acabado)
+_def = 'EYEBORG_CABLEADO.blend' if acabado == 'cromo' else 'EYEBORG_CABLEADO_MATE.blend'
+out = _args[0] if _args else os.path.join(ROOT, '..', 'modelos', _def)
+for _m in [m for m in bpy.data.materials if m.users == 0]:     # sin materiales huerfanos (p. ej. el 'Material' por defecto)
+    bpy.data.materials.remove(_m)
 bpy.ops.wm.save_as_mainfile(filepath=os.path.abspath(out))
-print('EYEBORG_CABLEADO guardado en', os.path.abspath(out))
+print('EYEBORG_CABLEADO (%s) guardado en' % acabado, os.path.abspath(out))

@@ -1,7 +1,7 @@
 """Renderiza el modelo en ortografica desde las mismas direcciones que las referencias.
-Uso: blender -b output/EYEBORG.blend -P tools/compare_views.py   (genera output/renders/cmp_*.png)"""
+Uso: blender -b modelos/EYEBORG.blend -P tools/compare_views.py   (genera renders_tmp/cmp_*.png)"""
 import bpy, os, math
-out = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'output', 'renders')
+out = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'renders_tmp')
 sc = bpy.context.scene
 sc.render.engine = 'BLENDER_WORKBENCH'; sc.render.resolution_x, sc.render.resolution_y = 900, 700
 sc.display.shading.light = 'STUDIO'; sc.display.shading.color_type = 'MATERIAL'

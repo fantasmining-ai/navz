@@ -3,8 +3,11 @@
 Esta guía está pensada para alguien **sin experiencia en comandos**. Sigue los pasos en orden y no te saltes ninguno.
 Al final verás en Blender, lado a lado:
 
-- **Diseño 1:** la estructura exoesquelética.
-- **Diseño 2:** la misma estructura con **cableado discreto simulado**, componentes y materiales profesionales.
+- **Diseño 1:** la estructura exoesquelética (acabado azul satinado).
+- **Diseño 2:** la estructura en **cromo satinado** con **cableado discreto simulado**, componentes y materiales.
+- **Diseño 3:** igual que el 2 pero en **resina translúcida esmerilada** (sin cromo), con texturas realistas de impresión 3D.
+
+> ¿Solo quieres *mirar* sin instalar nada? Las imágenes de todas las vistas (con y sin maniquí) están en la carpeta **`vistas/`** del proyecto: se abren con cualquier visor de imágenes. Hay un índice en `vistas/README.md`.
 
 > Tiempo estimado: 20-30 minutos la primera vez (casi todo es descargar e instalar).
 > Necesitas: una computadora Mac o Windows, conexión a internet y unos **2 GB** libres en disco.
@@ -68,7 +71,7 @@ Elige **una** de las dos opciones. **La opción A es la más fácil.**
 3. Cuando termine:
    - **Mac:** haz doble clic en el ZIP (se descomprime solo) y mueve la carpeta `Navy_Project-main` a **Documentos**.
    - **Windows:** clic derecho en el ZIP → **Extraer todo…** → elige **Documentos** → **Extraer**.
-4. Apunta la ubicación: la carpeta debe quedar como `Documentos/Navy_Project-main` y dentro verás `scripts`, `output`, `docs`…
+4. Apunta la ubicación: la carpeta debe quedar como `Documentos/Navy_Project-main` y dentro verás `scripts`, `modelos`, `docs`…
 
 Salta a [3. Abrir los diseños con el script](#3-abrir-los-diseños-con-el-script).
 
@@ -108,7 +111,7 @@ Salta a [3. Abrir los diseños con el script](#3-abrir-los-diseños-con-el-scrip
    ls
    ```
 
-   Debes ver: `README.md  docs  output  references  scripts  tools`.
+   Debes ver: `README.md  docs  modelos  references  scripts  tools  vistas`.
 
 #### Windows
 
@@ -144,7 +147,7 @@ Salta a [3. Abrir los diseños con el script](#3-abrir-los-diseños-con-el-scrip
    dir
    ```
 
-   (En Git Bash usa `ls`). Debes ver: `README.md  docs  output  references  scripts  tools`.
+   (En Git Bash usa `ls`). Debes ver: `README.md  docs  modelos  references  scripts  tools  vistas`.
 
 > **No necesitas cuenta de GitHub ni llaves SSH.** Si te pidiera usuario y contraseña, avisa a quien te pasó el proyecto: puede que el repositorio sea privado y haya que darte acceso.
 
@@ -167,11 +170,12 @@ Salta a [3. Abrir los diseños con el script](#3-abrir-los-diseños-con-el-scrip
      (cambia `TU_USUARIO` por tu nombre de usuario de Windows).
 5. Selecciona el archivo **`ver_disenos.py`** y pulsa **Open Text** (o *Abrir texto*).
 6. Pulsa el botón del **triángulo ▶ "Run Script"** (arriba del editor de texto), o presiona `Alt + P` (Mac: `Option + P`).
-7. Espera de **5 a 20 segundos**. Cuando termine, ve a la pestaña **Layout** (arriba): verás los dos diseños lado a lado.
-   - A la **izquierda**: *DISEÑO 1*.
-   - A la **derecha**: *DISEÑO 2 - CABLEADO*.
+7. Espera de **10 a 30 segundos**. Cuando termine, ve a la pestaña **Layout** (arriba): verás los tres diseños lado a lado.
+   - A la **izquierda**: *DISEÑO 1 - ESTRUCTURA*.
+   - En el **centro**: *DISEÑO 2 - CROMO SATINADO + CABLEADO*.
+   - A la **derecha**: *DISEÑO 3 - RESINA TRANSLÚCIDA + CABLEADO*.
 
-Si todo salió bien, en la parte inferior de la ventana (o en *Window → Toggle System Console* en Windows) verás líneas que empiezan con `EYEBORG: … cargado`.
+Si todo salió bien, en la parte inferior de la ventana (o en *Window → Toggle System Console* en Windows) verás líneas que empiezan con `EYEBORG: … cargado` (una por diseño).
 
 ---
 
@@ -196,13 +200,13 @@ Más trucos:
 
 ## 5. Ver el cableado (rayos X)
 
-En el **Diseño 2** la estructura es de cromo azul y los cables van por la **cara interna** (discretos), por eso al inicio no se ven bien. Para verlos:
+En los **diseños 2 y 3** los cables van por la **cara interna** de la estructura (discretos), por eso al inicio no se ven bien. Para verlos:
 
 - Pulsa **`Alt + Z`** (Mac: `Option + Z`) con el cursor sobre la vista 3D → activa los **rayos X** y la estructura se vuelve transparente. Vuelve a pulsarlo para desactivar.
 - Para ocultar piezas: en el panel **Outliner** (arriba a la derecha, lista de objetos) pulsa el **ojito 👁** junto al nombre.
-  - Colección **`DISENO_2` → `EYEBORG_20_CABLEADO`**: todos los cables, conectores y capacitores.
-  - Objeto **`EYEBORG_FUSION.001`** (el del diseño 2; el del diseño 1 se llama `EYEBORG_FUSION`): la estructura azul. Ocúltalo para ver solo cables y componentes.
-  - Objetos **`MANIQUI_NARIZ`, `MANIQUI_MENTON`, `MANIQUI_CUELLO`** y **`REF_CABEZA_BLOCKOUT`**: el maniquí esquemático de referencia (cabeza, nariz, mentón y cuello).
+  - Colección **`DISENO_2` (o `DISENO_3`) → `EYEBORG_20_CABLEADO`**: todos los cables, conectores y capacitores.
+  - Objeto **`EYEBORG_FUSION`** (diseño 1), **`EYEBORG_FUSION.001`** (diseño 2) o **`EYEBORG_FUSION.002`** (diseño 3): la estructura. Ocúltalo para ver solo cables y componentes.
+  - Objetos **`MANIQUI_CUERPO`** (colección `EYEBORG_14_MANIQUI`) y **`REF_CABEZA_BLOCKOUT`**: el maniquí anatómico esquemático de referencia (cabeza con rasgos, cuello y busto).
 
 Qué es cada cable (colores de ayuda visual):
 
@@ -219,15 +223,15 @@ Qué es cada cable (colores de ayuda visual):
 
 ---
 
-## 6. Ver el diseño 2 con luces de estudio y hacer un render
+## 6. Ver el diseño 2 o 3 con luces de estudio y hacer un render
 
-El script del paso 3 muestra los modelos con la iluminación estándar de Blender. El archivo del **Diseño 2** trae además **luces de estudio y cámaras** ya preparadas:
+El script del paso 3 muestra los modelos con la iluminación estándar de Blender. Los archivos de los **diseños 2 y 3** traen además **luces de estudio y cámaras** ya preparadas (el cromo y la resina se aprecian de verdad solo con esas luces):
 
-1. Menú **File → Open…** y elige **`output/EYEBORG_CABLEADO.blend`**
+1. Menú **File → Open…** y elige **`modelos/EYEBORG_CABLEADO.blend`** (cromo) o **`modelos/EYEBORG_CABLEADO_MATE.blend`** (resina)
    (si Blender pregunta por guardar cambios, elige *Don't Save* / *No guardar*).
 2. Pulsa las esferitas de arriba a la derecha de la vista 3D y elige la **cuarta (Rendered)** para ver los reflejos del cromo.
 3. Cámaras listas: en el **Outliner** (arriba a la derecha) haz clic en `CAM_hero`, `CAM_trasera`, `CAM_detalle_camara` o `CAM_lateral`; con el cursor sobre la vista 3D pulsa **View → Cameras → Set Active Object as Camera** y luego **View → Cameras → Active Camera** para mirar a través de ella.
-4. Para generar una imagen final: menú **Render → Render Image** (`F12`). Tarda entre **1 y 5 minutos** según el equipo. Se guarda con **Image → Save As…**
+4. Para generar una imagen final: menú **Render → Render Image** (`F12`). Tarda entre **1 y 5 minutos** según el equipo. Se guarda con **Image → Save As…** (si solo quieres imágenes, ya están hechas en `vistas/`).
 
 ---
 
@@ -252,7 +256,7 @@ Si te avisan que hay cambios nuevos:
 | Problema | Qué hacer |
 | --- | --- |
 | **No encuentro la pestaña Scripting** | Desliza las pestañas con la rueda del ratón sobre ellas o pulsa la flecha `>` del extremo derecho. |
-| **"Falta el archivo … EYEBORG.blend"** | Descargaste el proyecto incompleto. Vuelve a hacer *Download ZIP* o `git clone` y comprueba que existe la carpeta `output` con dos archivos `.blend`. |
+| **"Falta el archivo … EYEBORG.blend"** | Descargaste el proyecto incompleto. Vuelve a hacer *Download ZIP* o `git clone` y comprueba que existe la carpeta `modelos` con dos archivos `.blend`. |
 | **"No encuentro la ruta de ver_disenos.py"** | Abre el script con el botón **Open** del editor (no lo pegues). Así Blender conoce su carpeta. |
 | **Ventana en blanco o va muy lento** | Cambia a modo **Solid** (segunda esferita). Cierra otros programas pesados. |
 | **Todo se ve negro o gris** | Estás en Solid o Wireframe; pasa a **Material Preview** (tercera esferita). |
@@ -283,7 +287,7 @@ Si quieres regenerarlos desde cero (requiere ~30 segundos y Blender 5.1+):
   & "C:\Program Files\Blender Foundation\Blender 5.1\blender.exe" -b --factory-startup -P scripts/00_construir_conjunto.py --python-expr "import bpy; bpy.ops.wm.save_as_mainfile(filepath='salida_diseno1.blend')"
   ```
 
-  > Ajusta `5.1` a tu versión instalada. `00_construir_cableado.py` genera el diseño 2 (cableado y materiales) y, por defecto, **sobrescribe** `output/EYEBORG_CABLEADO.blend`; pasa otra ruta tras `--` (por ejemplo `-- mi_diseno2.blend`) para no pisarlo.
+  > Ajusta `5.1` a tu versión instalada. `00_construir_cableado.py` genera el diseño 2 (cromo) o el 3 (añade `mate` tras la ruta) y, por defecto, **sobrescribe** el `.blend` correspondiente de `modelos/`; pasa otra ruta tras `--` (por ejemplo `-- mi_diseno2.blend`, o `-- mi_diseno3.blend mate`) para no pisarlo.
 
 Parámetros del diseño (medidas, holguras, espinas, fusión): `scripts/eyeborg_config.json`.
 Comprobación ergonómica: `tools/check_ergonomia.py`. Comparación contra las referencias: `tools/compare_views.py`.

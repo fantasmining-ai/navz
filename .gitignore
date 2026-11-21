@@ -8,4 +8,4 @@ __pycache__/
 .DS_Store
 Thumbs.db
 # Renders intermedios (los publicados viven en docs/img)
-output/renders/
+renders_tmp/

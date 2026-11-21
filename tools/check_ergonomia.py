@@ -1,5 +1,5 @@
 """Chequeo de holgura contra la envolvente de cabeza (elipsoide verificado por el usuario).
-Uso: blender -b output/EYEBORG.blend -P tools/check_ergonomia.py"""
+Uso: blender -b modelos/EYEBORG.blend -P tools/check_ergonomia.py"""
 import bpy, math
 H = (82.5, 101.0, 107.5)          # semiejes cabeza 165x202x215
 GAP = 6.0                         # holgura nominal cabeza-estructura (mm)
@@ -27,9 +27,22 @@ print('VERTICES_EN_CORREDOR_NASAL', len(nose))
 # oreja: cualquier vertice de estructura en la ventana 68x52 centrada en el eje del oido (y=6, z=-18), |x|>60
 ear_any = [p for p in vs if abs(p.y-6) < 34 and abs(p.z+18) < 26 and abs(p.x) > 60]
 print('VERTICES_EN_VENTANA_OREJA_TOTAL', len(ear_any))
-# maniqui esquematico: nariz (elipsoide) y menton; ningun vertice de la estructura debe estar dentro
-def dentro(p, c, r): return ((p.x-c[0])/r[0])**2 + ((p.y-c[1])/r[1])**2 + ((p.z-c[2])/r[2])**2 < 1.0
-nose_in = [p for p in vs if dentro(p, (0,-104,-14), (11.2,16.8,22.0))]
-chin_in = [p for p in vs if dentro(p, (0,-84,-88), (30,26,22))]
-print('VERTICES_DENTRO_NARIZ', len(nose_in), 'VERTICES_DENTRO_MENTON', len(chin_in))
+# maniqui esquematico (malla real MANIQUI_CUERPO): distancia de la estructura a la piel del maniqui
+man = next((o for o in bpy.data.objects if o.name.startswith('MANIQUI_CUERPO')), None)
+if man is not None:
+    from mathutils.bvhtree import BVHTree
+    dgm = bpy.context.evaluated_depsgraph_get()
+    bvh = BVHTree.FromObject(man, dgm)
+    dentro = 0; cerca = 0; mn_gap = 1e9; mn_p = None
+    for p in vs:
+        loc, nrm, idx, dist = bvh.find_nearest(p)
+        if loc is None: continue
+        sg = (p - loc).dot(nrm)
+        gap = dist if sg >= 0 else -dist
+        if gap < 0: dentro += 1
+        elif gap < 4.0: cerca += 1
+        if gap < mn_gap: mn_gap, mn_p = gap, p
+    print('MANIQUI_VERTICES_DENTRO', dentro, 'a_menos_de_4mm', cerca, 'holgura_min_mm', round(mn_gap, 1), [round(c, 1) for c in mn_p])
+else:
+    print('SIN MANIQUI_CUERPO')
 print('CHECK OK')

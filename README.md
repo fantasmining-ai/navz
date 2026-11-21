@@ -6,7 +6,7 @@ Sistema vestible de estructura **abierta y ramificada** que integra cámara (ESP
 Este repositorio contiene el **modelo 3D paramétrico** (scripts de Blender), los **dos diseños** generados, las **referencias visuales** y la documentación derivada del *Expediente Técnico Integral* (rev. 20 de noviembre de 2026).
 
 <p align="center">
-  <img src="docs/img/d2_hero.png" alt="EYEBORG diseño 2: estructura de cromo azul con cableado discreto" width="860">
+  <img src="vistas/diseno_2/con_maniqui/07_isometrica_frontal.jpg" alt="EYEBORG diseño 2: estructura de cromo azul con cableado discreto" width="860">
 </p>
 
 > **Principio rector:** preservar la arquitectura abierta y ramificada de las ocho referencias azules. La integración electrónica se adapta a la estructura; no la convierte en una carcasa cerrada ni altera su silueta.
@@ -37,38 +37,57 @@ Este repositorio contiene el **modelo 3D paramétrico** (scripts de Blender), lo
 
 ---
 
-## Vista rápida: los dos diseños
+## Vista rápida: los tres diseños
 
-| | **Diseño 1: estructura** | **Diseño 2: cableado + materiales** |
-| --- | --- | --- |
-| Archivo | [`output/EYEBORG.blend`](output/EYEBORG.blend) | [`output/EYEBORG_CABLEADO.blend`](output/EYEBORG_CABLEADO.blend) |
-| Contenido | Exoesqueleto abierto de malla fusionada, plataforma de cámara con bolsa, agujeros de montaje, espinas de acento, módulos de referencia | Todo el diseño 1 **+** cableado discreto simulado (por la cara interna de los rieles), conectores, capacitores, componentes, maniquí esquemático, materiales procedurales (cromo azul, fibra de carbono, mangas de cable, emisivos) y estudio de iluminación con 4 cámaras |
-| Uso | Evaluar forma, ergonomía y modularidad | Visualizar recorridos de cables y la estética final |
+| | **Diseño 1 · Estructura** | **Diseño 2 · Cromo satinado + cableado** | **Diseño 3 · Resina translúcida + cableado** |
+| --- | --- | --- | --- |
+| Archivo | [`modelos/EYEBORG.blend`](modelos/EYEBORG.blend) | [`modelos/EYEBORG_CABLEADO.blend`](modelos/EYEBORG_CABLEADO.blend) | [`modelos/EYEBORG_CABLEADO_MATE.blend`](modelos/EYEBORG_CABLEADO_MATE.blend) |
+| Acabado | Azul satinado, estudio claro | **Plata / cromo satinado** (ref. máscara de plata): metal neutro de rugosidad media con recesos oscuros por oclusión; estudio oscuro con softboxes y luces de borde suaves | **Resina SLA translúcida esmerilada** (sin cromo; ref. gafas de resina azul): transmisión parcial, grano fino, bordes pulidos; estudio claro con maniquí blanco |
+| Contenido | Exoesqueleto abierto de malla fusionada, plataforma de cámara con bolsa, agujeros de montaje, espinas de acento, maniquí anatómico esquemático | Diseño 1 **+** cableado discreto simulado por la cara interna de los rieles, conectores, capacitores, componentes, placa occipital de fibra de carbono en sarga, aluminio cepillado | Igual que el diseño 2, con la estructura en resina translúcida |
+| Uso | Evaluar forma, ergonomía y modularidad | Presentación estética y recorrido de cables | Presentación realista del producto impreso / acabado profesional |
 
 <table>
   <tr>
-    <td><img src="docs/img/d1_iso_frontal.png" alt="Diseño 1, isométrica frontal"></td>
-    <td><img src="docs/img/d1_iso_trasera.png" alt="Diseño 1, isométrica trasera"></td>
+    <td><img src="vistas/diseno_1/con_maniqui/07_isometrica_frontal.jpg" alt="Diseño 1"></td>
+    <td><img src="vistas/diseno_2/con_maniqui/07_isometrica_frontal.jpg" alt="Diseño 2"></td>
+    <td><img src="vistas/diseno_3/con_maniqui/07_isometrica_frontal.jpg" alt="Diseño 3"></td>
   </tr>
   <tr>
-    <td align="center"><sub>Diseño 1 · isométrica frontal</sub></td>
-    <td align="center"><sub>Diseño 1 · isométrica trasera</sub></td>
+    <td align="center"><sub>Diseño 1 · estructura</sub></td>
+    <td align="center"><sub>Diseño 2 · cromo satinado + cableado</sub></td>
+    <td align="center"><sub>Diseño 3 · resina translúcida + cableado</sub></td>
   </tr>
   <tr>
-    <td><img src="docs/img/d2_trasera.png" alt="Diseño 2, vista trasera con placa de carbono"></td>
-    <td><img src="docs/img/d2_detalle_camara.png" alt="Diseño 2, detalle de la plataforma de cámara"></td>
+    <td><img src="vistas/diseno_1/sin_maniqui/08_isometrica_trasera.jpg" alt="Diseño 1 trasera"></td>
+    <td><img src="vistas/diseno_2/sin_maniqui/08_isometrica_trasera.jpg" alt="Diseño 2 trasera"></td>
+    <td><img src="vistas/diseno_3/sin_maniqui/08_isometrica_trasera.jpg" alt="Diseño 3 trasera"></td>
   </tr>
   <tr>
-    <td align="center"><sub>Diseño 2 · placa occipital de fibra de carbono</sub></td>
-    <td align="center"><sub>Diseño 2 · plataforma de cámara</sub></td>
+    <td align="center"><sub>Isométrica trasera</sub></td>
+    <td align="center"><sub>Isométrica trasera</sub></td>
+    <td align="center"><sub>Isométrica trasera</sub></td>
   </tr>
   <tr>
-    <td colspan="2"><img src="docs/img/d2_rayos_x_cableado.png" alt="Diseño 2 en rayos X: recorrido de cables"></td>
+    <td><img src="vistas/diseno_1/sin_maniqui/09_detalle_camara.jpg" alt="Diseño 1 detalle"></td>
+    <td><img src="vistas/diseno_2/sin_maniqui/09_detalle_camara.jpg" alt="Diseño 2 detalle"></td>
+    <td><img src="vistas/diseno_3/sin_maniqui/09_detalle_camara.jpg" alt="Diseño 3 detalle"></td>
   </tr>
   <tr>
-    <td colspan="2" align="center"><sub>Diseño 2 · vista en rayos X: potencia (rojo/negro) e I2S (cian) por la cara interna de los rieles, bandeja posterior a la derecha</sub></td>
+    <td align="center"><sub>Detalle de la plataforma de cámara</sub></td>
+    <td align="center"><sub>Detalle de la plataforma de cámara</sub></td>
+    <td align="center"><sub>Detalle de la plataforma de cámara</sub></td>
+  </tr>
+  <tr>
+    <td colspan="3"><img src="vistas/diseno_2/sin_maniqui/10_rayos_x_lateral.jpg" alt="Rayos X del cableado"></td>
+  </tr>
+  <tr>
+    <td colspan="3" align="center"><sub>Rayos X del cableado (diseños 2 y 3): potencia (rojo/negro) e I2S (cian) por la cara interna de los rieles; bandeja posterior a la derecha</sub></td>
   </tr>
 </table>
+
+### Galería completa de vistas
+
+Cada diseño tiene **9 vistas (frente, trasera, laterales izquierda/derecha, superior, inferior, dos isométricas y detalle de cámara), con y sin maniquí**, más rayos X del cableado en los diseños 2 y 3. Índice con miniaturas: [`vistas/README.md`](vistas/README.md).
 
 ### Comparación con las referencias azules
 
@@ -93,7 +112,7 @@ cd Navy_Project
 
 1. Instala **Blender 5.1 o superior** (https://www.blender.org/download/).
 2. Abre Blender → pestaña **Scripting** → **Open** → `scripts/ver_disenos.py` → **Run Script ▶**.
-3. Verás el **Diseño 1** (izquierda) y el **Diseño 2 con cableado** (derecha). `Alt + Z` activa rayos X para ver los cables.
+3. Verás los **tres diseños** lado a lado (1 · estructura, 2 · cromo satinado + cableado, 3 · resina translúcida + cableado). `Alt + Z` activa rayos X para ver los cables.
 
 ---
 
@@ -186,27 +205,31 @@ Resultado actual (medido sobre la malla final, [`tools/check_ergonomia.py`](tool
 | Vértices dentro del volumen de la cabeza | **0** |
 | Holgura mínima a la cabeza | **8.7 mm** (objetivo ≥ 6 mm) |
 | Vértices en la ventana del oído (68 × 52 mm) | **0** |
-| Vértices dentro de la nariz / el mentón del maniquí esquemático | **0 / 0** |
+| Vértices dentro del maniquí / holgura mínima a su piel | **0 / 6.2 mm** |
 | Vértices rozando el corredor nasal (±20.5 mm) | 4 (de 173 000) |
 
-> La envolvente de cabeza es un elipsoide, **no un escaneo**; los valores nasales son heredados y están pendientes de reconfirmar. El maniquí del diseño 2 (nariz, mentón y cuello de 380 mm de circunferencia) es **esquemático**. Validar con prototipo de baja resolución.
+> La envolvente de cabeza es un elipsoide, **no un escaneo**; los valores nasales son heredados y están pendientes de reconfirmar. El maniquí (rasgos faciales con ojos separados por la IPD de 65 mm, cuello de 380 mm de circunferencia, busto) es **esquemático**: no es un escaneo. Validar con prototipo de baja resolución.
 
 ---
 
 ## Control de calidad del modelo
 
-Auditoría estructural automática ([`tools/auditar.py`](tools/auditar.py)) sobre ambos `.blend`:
+Auditoría estructural automática ([`tools/auditar.py`](tools/auditar.py)) y chequeo ergonómico ([`tools/check_ergonomia.py`](tools/check_ergonomia.py)) sobre los tres `.blend`. Los tres comparten la misma malla estructural.
 
-| Comprobación | Diseño 1 | Diseño 2 |
-| --- | --- | --- |
-| Malla estructural (`EYEBORG_FUSION`) | 172 397 caras | 172 397 caras |
-| Aristas no manifold / vértices sueltos / caras degeneradas | 0 / 0 / 0 | 0 / 0 / 0 |
-| Islas desconectadas | 1 (una sola pieza) | 1 (una sola pieza) |
-| Normales (volumen con signo positivo) | ✔ 249 cm³ | ✔ 249 cm³ |
-| Dimensiones (X × Y × Z) | 194 × 283 × 159 mm | 194 × 283 × 159 mm |
-| Objetos duplicados `.001` / datos huérfanos / sin material | 0 / 0 / 0 | 0 / 0 / 0 |
-| Espesor de pared: mediana / p95 | 6.2 / 14.2 mm | 6.2 / 14.2 mm |
-| Muestras con espesor < 1.2 mm | 6.4 % (puntas de espina) | 6.4 % (puntas de espina) |
+| Comprobación | Diseño 1 | Diseño 2 | Diseño 3 |
+| --- | --- | --- | --- |
+| Malla estructural (`EYEBORG_FUSION`) | 172 397 caras | 172 397 caras | 172 397 caras |
+| Aristas no manifold / vértices sueltos / caras degeneradas | 0 / 0 / 0 | 0 / 0 / 0 | 0 / 0 / 0 |
+| Islas desconectadas | 1 (una sola pieza) | 1 | 1 |
+| Normales (volumen con signo positivo) | ✔ 249 cm³ | ✔ 249 cm³ | ✔ 249 cm³ |
+| Dimensiones (X × Y × Z) | 194 × 283 × 159 mm | 194 × 283 × 159 mm | 194 × 283 × 159 mm |
+| Objetos duplicados `.001` / sin material | 0 / 0 | 0 / 0 | 0 / 0 |
+| Objetos / materiales / cámaras / luces | 76 / 6 / 1 / 2 | 114 / 21 / 4 / 6 | 112 / 21 / 4 / 4 |
+| Vértices dentro de la cabeza · holgura mínima | 0 · 8.7 mm | 0 · 8.7 mm | 0 · 8.7 mm |
+| Vértices dentro del maniquí · holgura a su piel | 0 · 6.2 mm | 0 · 6.2 mm | 0 · 6.2 mm |
+| Ventana de oreja / corredor nasal (vértices) | 0 / 4 | 0 / 4 | 0 / 4 |
+| Espesor de pared: mediana / p95 | 6.2 / 14.2 mm | 6.2 / 14.2 mm | 6.2 / 14.2 mm |
+| Muestras con espesor < 1.2 mm | 6.4 % (puntas de espina) | 6.4 % | 6.4 % |
 
 - **Peso:** el volumen de la estructura es de ≈ 249 cm³; como orden de magnitud, ≈ 0.31 kg si fuera macizo en PLA (1.24 g/cm³). Con paredes y relleno parcial será bastante menor. **Estimación, no validada.**
 - **Puntas finas:** el ~6 % de espesor < 1.2 mm corresponde a las puntas de aguja de las espinas, por debajo de lo que imprime una boquilla estándar: redondearlas o engrosarlas antes de imprimir.
@@ -245,7 +268,7 @@ Usar `CAMERA_MODEL_AI_THINKER`. No asignar pines I2S/control sin revisar el sket
 
 Secuencia lógica prevista: **LiPo 3.7 V → TP4056 (carga/protección según variante) → interruptor y protección → MT3608 (ajustar y medir) → bus regulado ~5 V** para las placas compatibles, y riel específico para el PCM5102A.
 
-El **Diseño 2** visualiza este concepto con cables por la cara interna de los rieles (potencia por el riel izquierdo; bus I2S por el derecho), conectores JST, tres capacitores de desacople y salida de audio.
+Los **diseños 2 y 3** visualizan este concepto con cables por la cara interna de los rieles (potencia por el riel izquierdo; bus I2S por el derecho), conectores JST, tres capacitores de desacople y salida de audio.
 
 > ⛔ **No es un esquema de cableado terminal-a-terminal listo para energizar.** Antes de conectar: identificar la variante exacta de TP4056, el pinout de cada placa y las tensiones/corrientes reales; ajustar y medir el MT3608 con fuente limitada en corriente; medir consumos pico; dimensionar interruptor, fusible y conductores; **no** asignar GPIO I2S sin revisar el sketch; **no** aplicar 5 V al pin 3V3; **no** afirmar autonomía (500 mAh no está validado). Las **capacitancias están por definir**.
 
@@ -256,25 +279,36 @@ El **Diseño 2** visualiza este concepto con cables por la cara interna de los r
 ```text
 Navy_Project/
 ├── README.md
+├── modelos/                        # Los dos diseños listos para abrir en Blender
+│   ├── EYEBORG.blend               #   Diseño 1: estructura (acabado azul satinado)
+│   ├── EYEBORG_CABLEADO.blend      #   Diseño 2: cromo satinado + cableado + estudio oscuro
+│   └── EYEBORG_CABLEADO_MATE.blend #   Diseño 3: resina translúcida + cableado + estudio claro
+├── vistas/                         # Imágenes de cada vista, con y sin maniquí
+│   ├── README.md                   #   Índice con miniaturas
+│   └── diseno_{1,2,3}/{con_maniqui,sin_maniqui}/
 ├── docs/
-│   ├── INSTRUCCIONES.md        # Guía paso a paso Mac y Windows (desde git clone)
-│   ├── SPEC.md                 # Especificación del modelado
-│   ├── PLAN.md                 # Plan y estado
-│   └── img/                    # Renders usados en este README
-├── scripts/                    # Modelo paramétrico en Python (Blender)
-│   ├── ver_disenos.py          # ← Muestra diseño 1 y diseño 2 en Blender
-│   ├── 00_construir_conjunto.py        # Ensambla el diseño 1
-│   ├── 00_construir_cableado.py        # Ensambla el diseño 2
-│   ├── eyeborg_part_01 … 13_*.py       # Módulos por pieza
-│   ├── _eyeborg_core.py / _eyeborg_materials.py / _eyeborg_studio.py
-│   └── eyeborg_config.json     # Parámetros (medidas, holguras, espinas…)
-├── output/
-│   ├── EYEBORG.blend           # Diseño 1 (acabado azul satinado)
-│   └── EYEBORG_CABLEADO.blend  # Diseño 2
+│   ├── INSTRUCCIONES.md            # Guía paso a paso Mac y Windows (desde git clone)
+│   ├── SPEC.md                     # Especificación del modelado
+│   ├── PLAN.md                     # Plan y estado
+│   └── img/                        # Comparación con las referencias azules
 ├── references/
-│   ├── azules/                 # 8 vistas azules (geometría maestra) + lámina del expediente
-│   └── estetica/               # Referencias de estética cyborg / cyberpunk
-└── tools/                      # Auditoría, chequeo ergonómico, renders y comparación
+│   ├── azules/                     # 8 vistas azules (geometría maestra) + lámina del expediente
+│   └── estetica/                   # Referencias de estética cyborg / cyberpunk
+├── scripts/                        # Modelo paramétrico en Python (Blender)
+│   ├── ver_disenos.py              #   ← Muestra diseño 1 y diseño 2 en Blender
+│   ├── 00_construir_conjunto.py    #   Ensambla el diseño 1
+│   ├── 00_construir_cableado.py    #   Ensambla el diseño 2 (cromo) o 3 (mate)
+│   ├── 90_cotejo_dimensional.py    #   Cotejo de parámetros
+│   ├── eyeborg_part_01 … 14_*.py   #   Módulos por pieza
+│   ├── _eyeborg_core.py / _eyeborg_materials.py / _eyeborg_studio.py
+│   └── eyeborg_config.json         #   Parámetros (medidas, holguras, espinas…)
+└── tools/                          # Control de calidad y renders
+    ├── auditar.py                  #   Auditoría estructural de la malla
+    ├── check_ergonomia.py          #   Holgura a la cabeza, nariz, oído
+    ├── render_vistas.py            #   Genera vistas/ (con y sin maniquí)
+    ├── compare_views.py            #   Compara el modelo con las referencias azules
+    ├── hojas_contacto.py           #   Hojas resumen de vistas/ (requiere Pillow)
+    └── dev/                        #   Utilidades de desarrollo (visor con recarga automática)
 ```
 
 ---
@@ -283,9 +317,9 @@ Navy_Project/
 
 | Archivo | Función |
 | --- | --- |
-| `ver_disenos.py` | **Visor**: carga ambos `.blend` lado a lado (punto de entrada para quien solo quiere mirar) |
-| `00_construir_conjunto.py` | Ensambla las colecciones `EYEBORG_00 … 12` (diseño 1) |
-| `00_construir_cableado.py` | Diseño 1 + cableado + materiales + estudio (diseño 2) |
+| `ver_disenos.py` | **Visor**: carga los tres `.blend` lado a lado (punto de entrada para quien solo quiere mirar) |
+| `00_construir_conjunto.py` | Ensambla las colecciones `EYEBORG_00 … 14` (diseño 1) |
+| `00_construir_cableado.py` | Diseño 1 + cableado + materiales + estudio. Argumento `cromo` (diseño 2) o `mate` (diseño 3) |
 | `eyeborg_part_01_columna_frontal.py` | Punta con ranura y paredes internas |
 | `eyeborg_part_02_corona_y_puentes.py` | Barra de cámara y brazos |
 | `eyeborg_part_03_soporte_camara.py` | Pod de cámara y plataforma |
@@ -298,6 +332,7 @@ Navy_Project/
 | `eyeborg_part_11_fusion.py` | Fusión orgánica de la estructura (voxel remesh + suavizado) |
 | `eyeborg_part_12_agujeros.py` | Agujeros de montaje y bolsa de la plataforma de cámara |
 | `eyeborg_part_13_cableado.py` | Cables, conectores y capacitores simulados |
+| `eyeborg_part_14_maniqui.py` | Maniquí anatómico esquemático en una sola malla (cráneo, cejas, párpados, nariz, labios, mejillas, orejas, cuello, busto); se puede ocultar |
 | `90_cotejo_dimensional.py` | Imprime el cotejo de parámetros y estados |
 
 Los objetos `REF_*` son **referencias dimensionales**, no piezas de impresión: ocultarlos antes de exportar STL.
@@ -307,7 +342,7 @@ Los objetos `REF_*` son **referencias dimensionales**, no piezas de impresión: 
 ## Referencias visuales
 
 - **`references/azules/`**: las **ocho vistas azules** del usuario (autoridad visual de la revisión). No sustituyen una malla fuente. `ocho_vistas_expediente.png` es la lámina del expediente.
-- **`references/estetica/`**: imágenes de inspiración (cromo líquido, espinas afiladas, nervaduras orgánicas, estética cyborg-cyberpunk) usadas como guía de lenguaje formal.
+- **`references/estetica/`**: imágenes de inspiración usadas como guía: cromo líquido y espinas afiladas (01-09), **plata satinada** (10, referencia del diseño 2), **maniquíes con resina azul translúcida** (11-12, referencia del diseño 3 y del maniquí) y **cromo sobre maniquí** (13-14).
 
 ---
 
@@ -331,7 +366,7 @@ Riesgos principales: fidelidad geométrica (reconstrucción desde vistas), ajust
 
 - Los archivos `.py` se han ejecutado en **Blender 5.1.2** y los modelos se generan sin errores; la malla pasa la auditoría estructural (manifold, una sola pieza), pero **no** se ha probado en un laminador ni impresa.
 - Las **espinas** son decorativas y de punta aguda: comprobar que ninguna contacte piel, ojos u oídos y redondear la punta al imprimir.
-- El **cableado** del diseño 2 es una **simulación visual**; no autoriza conectar ni energizar nada.
+- El **cableado** de los diseños 2 y 3 es una **simulación visual**; no autoriza conectar ni energizar nada.
 - Conservar las etiquetas *provisional*, *pendiente* y *no energizar* al compartir este material.
 
 ---

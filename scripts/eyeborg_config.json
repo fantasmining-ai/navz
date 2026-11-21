@@ -225,5 +225,206 @@
     "nose_keepout_half_mm": 20.5,
     "status": "APPLIED_TO_CENTERLINES_NOT_VALIDATED_ON_REAL_HEAD",
     "note": "Holgura minima a la envolvente de cabeza y corredor nasal libre; la envolvente es un elipsoide, no un escaneo."
+  },
+  "mannequin": {
+    "voxel_mm": 1.8,
+    "smooth_iterations": 16,
+    "nota": "Maniqui esquematico (NO escaneo): elipsoides fusionados. Posiciones en mm; la cabeza es la envolvente verificada 165x202x215.",
+    "parts": [
+      {
+        "name": "craneo",
+        "c": [
+          0,
+          6,
+          14
+        ],
+        "r": [
+          82.5,
+          98,
+          96
+        ]
+      },
+      {
+        "name": "frente_cara",
+        "c": [
+          0,
+          -45,
+          -10
+        ],
+        "r": [
+          70,
+          56,
+          68
+        ]
+      },
+      {
+        "name": "mandibula",
+        "c": [
+          0,
+          -34,
+          -64
+        ],
+        "r": [
+          56,
+          64,
+          46
+        ]
+      },
+      {
+        "name": "menton",
+        "c": [
+          0,
+          -84,
+          -92
+        ],
+        "r": [
+          24,
+          20,
+          20
+        ]
+      },
+      {
+        "name": "ceja",
+        "c": [
+          0,
+          -93,
+          12
+        ],
+        "r": [
+          52,
+          13,
+          9
+        ]
+      },
+      {
+        "name": "parpado",
+        "c": [
+          32.5,
+          -92,
+          5
+        ],
+        "r": [
+          14,
+          8,
+          9
+        ],
+        "mirror": true,
+        "ipd_x": true
+      },
+      {
+        "name": "puente_nasal",
+        "c": [
+          0,
+          -98,
+          -4
+        ],
+        "r": [
+          5.5,
+          9,
+          16
+        ]
+      },
+      {
+        "name": "punta_nariz",
+        "c": [
+          0,
+          -108,
+          -26
+        ],
+        "r": [
+          10,
+          13,
+          11
+        ]
+      },
+      {
+        "name": "aleta_nasal",
+        "c": [
+          8,
+          -103,
+          -29
+        ],
+        "r": [
+          6.5,
+          8,
+          6.5
+        ],
+        "mirror": true
+      },
+      {
+        "name": "labio_superior",
+        "c": [
+          0,
+          -96,
+          -55
+        ],
+        "r": [
+          15,
+          7,
+          5
+        ]
+      },
+      {
+        "name": "labio_inferior",
+        "c": [
+          0,
+          -93,
+          -64
+        ],
+        "r": [
+          13,
+          7,
+          5.5
+        ]
+      },
+      {
+        "name": "mejilla",
+        "c": [
+          38,
+          -83,
+          -36
+        ],
+        "r": [
+          21,
+          15,
+          19
+        ],
+        "mirror": true
+      },
+      {
+        "name": "oreja",
+        "c": [
+          84,
+          6,
+          -18
+        ],
+        "r": [
+          6,
+          13,
+          21
+        ],
+        "mirror": true
+      }
+    ],
+    "neck": {
+      "c": [
+        0,
+        12,
+        -150
+      ],
+      "depth": 130.0
+    },
+    "bust": {
+      "c": [
+        0,
+        15,
+        -215
+      ],
+      "r": [
+        150,
+        75,
+        38
+      ]
+    }
   }
 }
