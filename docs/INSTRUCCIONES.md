@@ -252,6 +252,12 @@ Si te avisan que hay cambios nuevos:
 
 ---
 
+## 7b. Ver una versión anterior
+
+Las versiones previas están en la carpeta `versiones/` (índice en `versiones/README.md`). Para verlas en Blender: abre `scripts/ver_disenos.py`, cambia la línea `VERSION = ''` por, por ejemplo, `VERSION = 'v3_tres_disenos_frente_abanico'` y ejecútalo. Para solo mirar imágenes, abre `versiones/<versión>/vistas/` o `imagenes/`. Al terminar, vuelve a dejar `VERSION = ''`.
+
+---
+
 ## 8. Problemas frecuentes
 
 | Problema | Qué hacer |

@@ -17,6 +17,7 @@ import os
 import bpy
 
 # ----------------------------- configuracion -----------------------------
+VERSION = ''              # '' = version actual (carpeta modelos/). Para una anterior: p. ej. 'v3_tres_disenos_frente_abanico' (ver versiones/README.md)
 SEPARACION_MM = 270.0     # distancia entre diseños (cada modelo mide ~194 x 283 x 159 mm)
 ARCHIVOS = (
     ('DISENO_1', 'DISEÑO 1 - ESTRUCTURA', 'EYEBORG.blend', -SEPARACION_MM),
@@ -107,7 +108,11 @@ def main():
     esc.unit_settings.length_unit = 'MILLIMETERS'
     _limpiar()
     for clave, titulo, archivo, dx in ARCHIVOS:
-        padre, n = _importar(os.path.join(raiz, 'modelos', archivo), clave, dx)
+        base = os.path.join(raiz, 'versiones', VERSION, 'modelos') if VERSION else os.path.join(raiz, 'modelos')
+        ruta = os.path.join(base, archivo)
+        if VERSION and not os.path.isfile(ruta):
+            print('EYEBORG: %s no existe en la version %s (se omite)' % (titulo, VERSION)); continue
+        padre, n = _importar(ruta, clave, dx)
         _etiqueta(titulo, dx)
         print('EYEBORG: %s cargado (%d objetos) desde %s' % (titulo, n, archivo))
     _vista()

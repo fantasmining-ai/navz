@@ -28,6 +28,7 @@ Este repositorio contiene el **modelo 3D paramétrico** (scripts de Blender), lo
 - [Arquitectura mecánica y modular](#arquitectura-mecánica-y-modular)
 - [Arquitectura de software y red](#arquitectura-de-software-y-red)
 - [Cableado y alimentación (conceptual)](#cableado-y-alimentación-conceptual)
+- [Versiones anteriores](#versiones-anteriores)
 - [Estructura del repositorio](#estructura-del-repositorio)
 - [Scripts de Blender](#scripts-de-blender)
 - [Referencias visuales](#referencias-visuales)
@@ -277,6 +278,10 @@ Los **diseños 2 y 3** visualizan este concepto con cables por la cara interna d
 
 ---
 
+## Versiones anteriores
+
+Las versiones previas de los diseños **no se borraron**: están archivadas por versión en [`versiones/`](versiones/README.md) (v1 primer modelo, v2 pulido, **v3 tres diseños con frente de abanico**, v4 visor inuit con maniquí de elipsoides), cada una con sus `.blend`, imágenes, métricas y cómo abrirla. La carpeta [`modelos/`](modelos/) y [`vistas/`](vistas/) siempre contienen la **versión actual (v5)**.
+
 ## Estructura del repositorio
 
 ```text
@@ -286,6 +291,7 @@ Navy_Project/
 │   ├── EYEBORG.blend               #   Diseño 1: estructura (acabado azul satinado)
 │   ├── EYEBORG_CABLEADO.blend      #   Diseño 2: cromo satinado + cableado + estudio oscuro
 │   └── EYEBORG_CABLEADO_MATE.blend #   Diseño 3: resina translúcida + cableado + estudio claro
+├── versiones/                      # Versiones anteriores archivadas (v1-v4), cada una con modelos, imágenes y métricas
 ├── vistas/                         # Imágenes de cada vista, con y sin maniquí
 │   ├── README.md                   #   Índice con miniaturas
 │   └── diseno_{1,2,3}/{con_maniqui,sin_maniqui}/

@@ -12,6 +12,7 @@ Alcance y criterios: [`SPEC.md`](SPEC.md) y [`SPEC_AJUSTE_ANATOMICO.md`](SPEC_AJ
 - [x] Auditoría (`tools/auditar.py`), ergonomía (`check_ergonomia.py`), campo visual (`campo_visual.py`).
 - [x] Simulación de movimientos del cuello (14 poses) y de proporciones (11 variantes) en `simulaciones/`.
 - [x] Galería `vistas/` (58 imágenes con y sin maniquí), visor `ver_disenos.py` y guía Mac/Windows.
+- [x] Versiones anteriores archivadas en `versiones/` (v1-v4) con fichas, métricas y visor por versión.
 - [x] Repositorio ordenado (`modelos/`, `vistas/`, `assets/`, `simulaciones/`, `tools/dev/`).
 
 ## Pendiente

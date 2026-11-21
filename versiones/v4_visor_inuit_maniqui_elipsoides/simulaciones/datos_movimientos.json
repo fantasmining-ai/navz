@@ -1,0 +1,212 @@
+[
+  {
+    "pose": "neutra",
+    "flexion": 0,
+    "giro_izq": 0,
+    "inclinacion_izq": 0,
+    "origen": "referencia",
+    "holgura_min_mm": 51.2,
+    "pieza_critica": "JACK_AUDIO_PUNTA",
+    "punto": [
+      26.0,
+      144.1,
+      -118.4
+    ],
+    "puntos_en_colision": 0
+  },
+  {
+    "pose": "flexion_30_lectura",
+    "flexion": 30,
+    "giro_izq": 0,
+    "inclinacion_izq": 0,
+    "origen": "tarea diaria: lectura/teléfono",
+    "holgura_min_mm": 50.9,
+    "pieza_critica": "JACK_AUDIO_PUNTA",
+    "punto": [
+      25.2,
+      109.8,
+      -54.2
+    ],
+    "puntos_en_colision": 0
+  },
+  {
+    "pose": "flexion_50",
+    "flexion": 50,
+    "giro_izq": 0,
+    "inclinacion_izq": 0,
+    "origen": "norma clínica ~50°",
+    "holgura_min_mm": 62.9,
+    "pieza_critica": "JACK_AUDIO_PUNTA",
+    "punto": [
+      26.0,
+      68.8,
+      -22.1
+    ],
+    "puntos_en_colision": 0
+  },
+  {
+    "pose": "flexion_60",
+    "flexion": 60,
+    "giro_izq": 0,
+    "inclinacion_izq": 0,
+    "origen": "rango medido ~68°",
+    "holgura_min_mm": 72.3,
+    "pieza_critica": "EYEBORG_FUSION",
+    "punto": [
+      -81.4,
+      -160.1,
+      -133.7
+    ],
+    "puntos_en_colision": 0
+  },
+  {
+    "pose": "extension_30",
+    "flexion": -30,
+    "giro_izq": 0,
+    "inclinacion_izq": 0,
+    "origen": "mirar hacia arriba",
+    "holgura_min_mm": 41.5,
+    "pieza_critica": "JACK_AUDIO_PUNTA",
+    "punto": [
+      26.0,
+      142.8,
+      -184.7
+    ],
+    "puntos_en_colision": 0
+  },
+  {
+    "pose": "extension_45",
+    "flexion": -45,
+    "giro_izq": 0,
+    "inclinacion_izq": 0,
+    "origen": "extensión moderada",
+    "holgura_min_mm": 33.8,
+    "pieza_critica": "JACK_AUDIO_PUNTA",
+    "punto": [
+      26.0,
+      130.1,
+      -213.1
+    ],
+    "puntos_en_colision": 0
+  },
+  {
+    "pose": "extension_60",
+    "flexion": -60,
+    "giro_izq": 0,
+    "inclinacion_izq": 0,
+    "origen": "norma clínica ~60°",
+    "holgura_min_mm": 21.8,
+    "pieza_critica": "JACK_AUDIO_PUNTA",
+    "punto": [
+      26.0,
+      111.2,
+      -235.8
+    ],
+    "puntos_en_colision": 0
+  },
+  {
+    "pose": "giro_izq_45",
+    "flexion": 0,
+    "giro_izq": 45,
+    "inclinacion_izq": 0,
+    "origen": "cruzar la calle (~54°)",
+    "holgura_min_mm": 46.4,
+    "pieza_critica": "JACK_AUDIO_PUNTA",
+    "punto": [
+      -75.4,
+      122.6,
+      -118.3
+    ],
+    "puntos_en_colision": 0
+  },
+  {
+    "pose": "giro_izq_80",
+    "flexion": 0,
+    "giro_izq": 80,
+    "inclinacion_izq": 0,
+    "origen": "rotación máxima (~78°)",
+    "holgura_min_mm": 37.2,
+    "pieza_critica": "JACK_AUDIO_PUNTA",
+    "punto": [
+      -123.7,
+      58.2,
+      -118.3
+    ],
+    "puntos_en_colision": 0
+  },
+  {
+    "pose": "giro_der_80",
+    "flexion": 0,
+    "giro_izq": -80,
+    "inclinacion_izq": 0,
+    "origen": "rotación máxima (~77°)",
+    "holgura_min_mm": 36.5,
+    "pieza_critica": "JACK_AUDIO_PUNTA",
+    "punto": [
+      132.1,
+      9.1,
+      -118.4
+    ],
+    "puntos_en_colision": 0
+  },
+  {
+    "pose": "inclinacion_izq_45",
+    "flexion": 0,
+    "giro_izq": 0,
+    "inclinacion_izq": 45,
+    "origen": "norma clínica 45°",
+    "holgura_min_mm": 46.4,
+    "pieza_critica": "JACK_AUDIO_PUNTA",
+    "punto": [
+      59.2,
+      144.1,
+      -148.7
+    ],
+    "puntos_en_colision": 0
+  },
+  {
+    "pose": "inclinacion_der_45",
+    "flexion": 0,
+    "giro_izq": 0,
+    "inclinacion_izq": -45,
+    "origen": "norma clínica 45°",
+    "holgura_min_mm": 51.9,
+    "pieza_critica": "BANDEJA_ELECTRONICA_104x58x2",
+    "punto": [
+      -136.3,
+      109.6,
+      -107.6
+    ],
+    "puntos_en_colision": 0
+  },
+  {
+    "pose": "mirar_sobre_hombro",
+    "flexion": -15,
+    "giro_izq": 70,
+    "inclinacion_izq": 15,
+    "origen": "retroceder en coche (92 % de la rotación)",
+    "holgura_min_mm": 34.6,
+    "pieza_critica": "JACK_AUDIO_PUNTA",
+    "punto": [
+      -101.1,
+      93.0,
+      -133.5
+    ],
+    "puntos_en_colision": 0
+  },
+  {
+    "pose": "extension_30_giro_45",
+    "flexion": -30,
+    "giro_izq": 45,
+    "inclinacion_izq": 0,
+    "origen": "combinado",
+    "holgura_min_mm": 34.8,
+    "pieza_critica": "JACK_AUDIO_PUNTA",
+    "punto": [
+      -72.1,
+      122.9,
+      -178.6
+    ],
+    "puntos_en_colision": 0
+  }
+]
