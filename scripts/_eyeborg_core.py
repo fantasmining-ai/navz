@@ -237,8 +237,31 @@ except Exception:
     pass
 
 
+_HEAD_BVH = None
+
+
+def set_head_mesh(obj):
+    """Usa la malla real del maniqui (en lugar del elipsoide) para holguras y empuje ergonomico."""
+    global _HEAD_BVH
+    from mathutils.bvhtree import BVHTree
+    dg = bpy.context.evaluated_depsgraph_get()
+    _HEAD_BVH = BVHTree.FromObject(obj, dg)
+
+
+def _bvh_gap(p):
+    loc, nrm, idx, dist = _HEAD_BVH.find_nearest(Vector(p))
+    if loc is None:
+        return 1e9, Vector((0, -1, 0))
+    d = Vector(p) - loc
+    sgn = 1.0 if d.dot(nrm) >= 0 else -1.0
+    dirv = (d.normalized() if d.length > 1e-9 else nrm) * sgn if sgn > 0 else nrm
+    return sgn * dist, dirv
+
+
 def head_gap_mm(p):
-    """Distancia aproximada (mm) de p a la superficie de la cabeza; negativa si esta dentro."""
+    """Distancia (mm) de p a la piel (malla del maniqui si existe; si no, al elipsoide de la envolvente); negativa si esta dentro."""
+    if _HEAD_BVH is not None:
+        return _bvh_gap(p)[0]
     a, b, c = HEAD_SEMI
     r2 = (p.x / a) ** 2 + (p.y / b) ** 2 + (p.z / c) ** 2
     g = Vector((p.x / a ** 2, p.y / b ** 2, p.z / c ** 2))
@@ -246,9 +269,19 @@ def head_gap_mm(p):
 
 
 def push_out_of_head(p, required):
-    """Desplaza p a lo largo del gradiente de la cabeza hasta cumplir la holgura requerida (mm)."""
-    a, b, c = HEAD_SEMI
+    """Desplaza p hacia fuera hasta cumplir la holgura requerida (mm) respecto a la piel."""
     q = Vector(p)
+    if _HEAD_BVH is not None:
+        # solo la region de la cabeza (por encima del cuello): evita empujar por el cuello/hombros
+        if q.z < -100.0:
+            return q
+        for _ in range(4):
+            gap, dirv = _bvh_gap(q)
+            if gap >= required:
+                break
+            q = q + dirv * (required - gap)
+        return q
+    a, b, c = HEAD_SEMI
     for _ in range(4):
         gap = head_gap_mm(q)
         if gap >= required:

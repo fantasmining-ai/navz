@@ -197,15 +197,19 @@ El ajuste a **ojos, nariz y orejas** se rediseñó a partir de una investigació
 
 | Comprobación (`tools/campo_visual.py`, `check_ergonomia.py`) | Antes | Ahora |
 | --- | --- | --- |
-| Campo visual central (±30°) bloqueado | 79 % | **30.5 %** |
-| **Ventana de la ranura** (±30° × ±12°) bloqueada | — | **1.0 %** |
-| Distancia estructura–córnea | — | **17.0 mm** (≥ 15) |
-| Anclajes con contacto real en la piel del maniquí | ninguno | **6 de 6** (0.0 mm) |
+| Campo visual central (±30°) bloqueado | 79 % | **36.5 %** |
+| **Ventana de la ranura** (±30° × ±12°) bloqueada | — | **4.2 %** (puntales del puente nasal) |
+| Distancia estructura–córnea | — | **21.3 mm** (≥ 15) |
+| Anclajes con contacto real en la piel del maniquí | ninguno | **6 de 6** (0.0 mm sobre la piel real) |
 | Vértices en la ventana de oreja (68 × 52 mm) / dentro de la cabeza / dentro del maniquí | 0 / 0 / 0 | **0 / 0 / 0** |
-| Holgura mínima a la piel (fuera de anclajes) | 6.2 mm | **5.9 mm** (objetivo 6; desviación de 0.1 mm en el riel superior trasero) |
+| Holgura mínima a la **piel real** (fuera de anclajes) | 6.2 mm | **7.9 mm** (objetivo ≥ 6) |
 | Colisión con torso en 14 movimientos del cuello | ninguna | **ninguna** (mín. 21.8 mm; flexión hasta 60°, extensión 60°, giro 80°, inclinación 45°) |
 
-> **Límites honestos.** Los puntos de referencia anatómicos (landmarks) son **estimados de la literatura**, no medidos en la persona: hay que verificarlos con fotos o escaneo. El maniquí mejoró (rasgos con proporciones de literatura, ojos separados por la IPD, orejas de 60 × 31 mm) pero **sigue siendo esquemático**, no un escaneo ni una escultura realista. No se simularon expresiones faciales dinámicas ni la presión real en las almohadillas.
+**Maniquí:** cabeza humana realista de la malla base **CC0** *Human Base Meshes v1.4.1* (Blender Studio), escalada a tus medidas verificadas (IPD 65 mm, profundidad craneal 202 mm, altura 215 mm) con ojos (esclera e iris), nariz, orejas, cuello y hombros. La ergonomía se mide **contra su piel real**. Ver [`assets/maniqui/LICENCIA.md`](assets/maniqui/LICENCIA.md).
+
+**Simulación de proporciones** ([`simulaciones/proporciones.md`](simulaciones/proporciones.md)): con el diseño fijo, tolera aprox. **−6 %…+3 % de ancho de cabeza, −5 %…+2 % de largo e IPD 58–68 mm**; con cabezas más anchas/largas o IPD 72 mm pierde holgura → hacen falta tallas S/M/L, almohadillas ajustables o ranuras con más margen.
+
+> **Límites honestos.** Los puntos de referencia anatómicos son **derivados de una cabeza genérica escalada** (no de la persona): hay que verificarlos con fotos o escaneo. El ancho craneal escalado (~157 mm) no coincide con los 165 mm de la envolvente declarada. No se simularon expresiones faciales dinámicas ni la presión real en las almohadillas.
 
 ---
 
@@ -215,20 +219,20 @@ Auditoría estructural automática ([`tools/auditar.py`](tools/auditar.py)) y ch
 
 | Comprobación | Diseño 1 | Diseño 2 | Diseño 3 |
 | --- | --- | --- | --- |
-| Malla estructural (`EYEBORG_FUSION`) | 131 389 caras | 131 389 caras | 131 389 caras |
+| Malla estructural (`EYEBORG_FUSION`) | 133 178 caras | 133 178 caras | 133 178 caras |
 | Aristas no manifold / vértices sueltos / caras degeneradas | 0 / 0 / 0 | 0 / 0 / 0 | 0 / 0 / 0 |
 | Islas desconectadas | 1 (una sola pieza) | 1 | 1 |
-| Normales (volumen con signo positivo) | ✔ 184 cm³ | ✔ 184 cm³ | ✔ 184 cm³ |
-| Dimensiones (X × Y × Z) | 193 × 283 × 137 mm | 193 × 283 × 137 mm | 193 × 283 × 137 mm |
+| Normales (volumen con signo positivo) | ✔ 185 cm³ | ✔ 185 cm³ | ✔ 185 cm³ |
+| Dimensiones (X × Y × Z) | 190 × 286 × 137 mm | 190 × 286 × 137 mm | 190 × 286 × 137 mm |
 | Objetos duplicados `.001` / sin material | 0 / 0 | 0 / 0 | 0 / 0 |
-| Objetos / materiales / cámaras / luces | 88 / 6 / 1 / 2 | 126 / 22 / 4 / 6 | 124 / 22 / 4 / 4 |
+| Objetos / materiales / cámaras / luces | 92 / 8 / 1 / 2 | 130 / 24 / 4 / 6 | 128 / 24 / 4 / 4 |
 | Vértices dentro de la cabeza · holgura mínima | 0 · 8.4 mm | 0 · 8.4 mm | 0 · 8.4 mm |
-| Vértices dentro del maniquí · holgura a su piel | 0 · 5.9 mm | 0 · 5.9 mm | 0 · 5.9 mm |
-| Ventana de oreja (vértices) · distancia a la córnea | 0 · 17.0 mm | 0 · 17.0 mm | 0 · 17.0 mm |
-| Espesor de pared: mediana / p95 | 6.0 / 14.1 mm | 6.0 / 14.1 mm | 6.0 / 14.1 mm |
+| Vértices dentro del maniquí · holgura a su piel | 0 · 7.9 mm | 0 · 7.9 mm | 0 · 7.9 mm |
+| Ventana de oreja (vértices) · distancia a la córnea | 0 · 21.3 mm | 0 · 21.3 mm | 0 · 21.3 mm |
+| Espesor de pared: mediana / p95 | 6.0 / 13.6 mm | 6.0 / 13.6 mm | 6.0 / 13.6 mm |
 | Muestras con espesor < 1.2 mm | 6.2 % (puntas de espina) | 6.2 % | 6.2 % |
 
-- **Peso:** el volumen de la estructura es de ≈ 184 cm³; como orden de magnitud, ≈ 0.23 kg si fuera macizo en PLA (1.24 g/cm³). Con paredes y relleno parcial será bastante menor. **Estimación, no validada.**
+- **Peso:** el volumen de la estructura es de ≈ 185 cm³; como orden de magnitud, ≈ 0.23 kg si fuera macizo en PLA (1.24 g/cm³). Con paredes y relleno parcial será bastante menor. **Estimación, no validada.**
 - **Puntas finas:** el ~6 % de espesor < 1.2 mm corresponde a las puntas de aguja de las espinas, por debajo de lo que imprime una boquilla estándar: redondearlas o engrosarlas antes de imprimir.
 - La malla es estanca (manifold), pero **no se ha probado en un laminador (slicer) ni impresa**.
 
@@ -283,7 +287,8 @@ Navy_Project/
 ├── vistas/                         # Imágenes de cada vista, con y sin maniquí
 │   ├── README.md                   #   Índice con miniaturas
 │   └── diseno_{1,2,3}/{con_maniqui,sin_maniqui}/
-├── simulaciones/                   # Simulación de movimientos del cuello (informe, poses, GIF)
+├── assets/maniqui/                 # Cabeza base CC0 (Blender Studio) + licencia
+├── simulaciones/                   # Movimientos del cuello (informe, poses, GIF) y proporciones
 ├── docs/
 │   ├── SPEC_AJUSTE_ANATOMICO.md    # Investigación + spec del ajuste a ojos, nariz y orejas
 │   ├── INSTRUCCIONES.md            # Guía paso a paso Mac y Windows (desde git clone)
@@ -306,6 +311,8 @@ Navy_Project/
     ├── check_ergonomia.py          #   Holgura a la cabeza/maniquí, ojos, oído, anclajes
     ├── campo_visual.py             #   Campo visual libre por las ranuras
     ├── simulacion_movimientos.py   #   Cuello en 14 poses + equilibrio de masas
+    ├── simulacion_proporciones.py  #   Tolerancia del diseño a distintas cabezas e IPD
+    ├── extraer_base_cc0.py         #   Extrae cabeza y ojos de la malla base CC0
     ├── render_vistas.py            #   Genera vistas/ (con y sin maniquí)
     ├── compare_views.py            #   Compara el modelo con las referencias azules
     ├── hojas_contacto.py           #   Hojas resumen de vistas/ (requiere Pillow)
@@ -334,7 +341,7 @@ Navy_Project/
 | `eyeborg_part_13_cableado.py` | Cables, conectores y capacitores simulados |
 | `eyeborg_part_15_visor.py` | Visor inuit con ranuras, brazos de sien y gancho sobre la oreja |
 | `eyeborg_part_01_columna_frontal.py` | Anclajes centrales: almohadillas y puntales del puente nasal y la frente |
-| `eyeborg_part_14_maniqui.py` | Maniquí anatómico esquemático en una sola malla (cráneo, cejas, párpados, nariz, labios, mejillas, orejas, cuello, busto); se puede ocultar |
+| `eyeborg_part_14_maniqui.py` | Maniquí con la malla base CC0 escalada a las medidas (cabeza, ojos, cuello, hombros); si falta el asset usa una versión procedural; se puede ocultar |
 | `90_cotejo_dimensional.py` | Imprime el cotejo de parámetros y estados |
 
 Los objetos `REF_*` son **referencias dimensionales**, no piezas de impresión: ocultarlos antes de exportar STL.
@@ -376,5 +383,6 @@ Riesgos principales: fidelidad geométrica (reconstrucción desde vistas), ajust
 ## Créditos y licencias
 
 - Documento fuente: *EYEBORG · Expediente Técnico Integral* (rev. 20 nov 2026).
+- **Maniquí:** malla base *Human Base Meshes v1.4.1* de **Blender Studio y colaboradores**, licencia **CC0** ([`assets/maniqui/LICENCIA.md`](assets/maniqui/LICENCIA.md)).
 - Las imágenes de `references/estetica/` son **material de inspiración de terceros** recopilado de internet; **pertenecen a sus autores** y no se ofrecen bajo la licencia del proyecto. Si eres autor y deseas que se retire alguna, abre un *issue*.
 - **Licencia del código y modelos: pendiente de definir** por los responsables del proyecto.

@@ -17,7 +17,10 @@ Ver [`SPEC.md`](SPEC.md) para alcance y criterios.
 - [x] Ajuste anatómico (spec + investigación con fuentes + simulación de movimientos): visor inuit con ranuras alineadas a las pupilas, anclajes (nariz, frente, oreja), campo visual y distancias medidas.
 
 ## Pendiente
-- [ ] Verificar landmarks con fotos/escaneo de la persona; elegir ruta B para el maniquí (malla base CC0, requiere permiso de descarga).
+- [x] Maniquí con malla base CC0 (Blender Studio), escalada a las medidas; ergonomía medida contra la piel real.
+- [x] Simulación de proporciones (tolerancia del diseño a distintas cabezas e IPD).
+- [ ] Verificar landmarks con fotos/escaneo de la persona (el ancho craneal escalado ~157 mm no coincide con 165 mm).
+- [ ] Tallas S/M/L y almohadillas ajustables (conclusión de la simulación de proporciones).
 - [ ] F6: simulación facial dinámica (expresiones) y presión en almohadillas.
 - [ ] Reconfirmar medidas nasales y de oído heredadas; definir recorrido de “curvatura” y “mandíbula”.
 - [ ] Validar holguras con prototipo de baja resolución; escaneo 3D de cabeza si es posible.

@@ -200,7 +200,7 @@
     ],
     "camera_plate_center_mm": [
       0.0,
-      -118.0,
+      -120.0,
       48.5
     ],
     "camera_pocket_mm_xyz": [
@@ -494,7 +494,31 @@
         ]
       }
     ],
-    "neck_axis_y": 12.0
+    "neck_axis_y": 12.0,
+    "base_mesh": {
+      "activo": true,
+      "asset": "assets/maniqui/cabeza_base_cc0.blend",
+      "centro_x_m": 1.4626,
+      "centro_y_m": -0.05055,
+      "centro_z_m": 0.7642,
+      "escala_mm_por_m": [
+        1006.19,
+        1027.99,
+        925.13
+      ],
+      "nota": "Cabeza de Human Base Meshes v1.4.1 (Blender Studio, CC0) escalada a IPD 65 mm, profundidad craneal 202 mm y altura vertice-menton 215 mm. Ancho craneal resultante ~157 mm (la envolvente declara 165: verificar).",
+      "objetos": {
+        "cuerpo": "BASE_CABEZA",
+        "esclera": [
+          "BASE_ESCLERA_L",
+          "BASE_ESCLERA_R"
+        ],
+        "iris": [
+          "BASE_IRIS_L",
+          "BASE_IRIS_R"
+        ]
+      }
+    }
   },
   "kinematics": {
     "pivot_upper_mm": [
@@ -539,8 +563,8 @@
   },
   "landmarks": {
     "estado": "ESTIMADO_DE_LITERATURA_NO_MEDIDO_EN_LA_PERSONA",
-    "eye_center_z": 6.0,
-    "cornea_apex_y": -97.0,
+    "eye_center_z": 2.3,
+    "cornea_apex_y": -87.5,
     "eyelid_surface_y": -99.0,
     "nasion": [
       0,
@@ -554,8 +578,8 @@
     ],
     "pronasale": [
       0,
-      -124,
-      -40
+      -121.8,
+      -28.9
     ],
     "subnasale": [
       0,
@@ -588,21 +612,23 @@
       0,
       -104,
       -107
-    ]
+    ],
+    "eyeball_center_y": -77.8,
+    "fuente": "malla base CC0 ajustada (mannequin.base_mesh)"
   },
   "visor": {
     "estado": "PROVISIONAL",
-    "z_center_mm": 9.0,
+    "z_center_mm": 5.0,
     "height_mm": 26.0,
     "thickness_mm": 3.2,
     "half_span_mm": 74.0,
-    "standoff_center_mm": 19.0,
+    "standoff_center_mm": 14.0,
     "standoff_side_mm": 11.5,
     "cornea_clearance_min_mm": 15.0,
     "slit": {
       "length_mm": 48.0,
       "height_mm": 14.0,
-      "z_mm": 6.0,
+      "z_mm": 2.3,
       "center_x_mm": 32.5
     },
     "pad_thickness_mm": 5.0,

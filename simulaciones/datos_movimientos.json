@@ -50,12 +50,12 @@
     "giro_izq": 0,
     "inclinacion_izq": 0,
     "origen": "rango medido ~68°",
-    "holgura_min_mm": 72.3,
+    "holgura_min_mm": 70.3,
     "pieza_critica": "EYEBORG_FUSION",
     "punto": [
-      -81.4,
-      -160.1,
-      -133.7
+      -80.5,
+      -156.5,
+      -136.8
     ],
     "puntos_en_colision": 0
   },

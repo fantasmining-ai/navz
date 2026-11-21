@@ -1,5 +1,7 @@
 # Vistas de los diseños EYEBORG
 
+> ⚠️ **En regeneración:** las imágenes de esta carpeta se generaron con el maniquí anterior (elipsoides). Los `.blend` de `modelos/` ya usan la cabeza realista CC0; las vistas se están volviendo a renderizar.
+
 Imágenes de cada vista de los tres diseños, **con y sin maniquí esquemático** (cráneo 165 × 202 × 215 mm, nariz, mentón y cuello de 380 mm; no es un escaneo).
 
 Vistas ortográficas: frente, trasera, lateral izquierda/derecha (del usuario), superior e inferior. Perspectivas: isométrica frontal, isométrica trasera y detalle de la cámara. Los diseños 2 y 3 añaden vistas en rayos X del cableado (solo sin maniquí).

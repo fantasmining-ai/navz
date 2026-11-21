@@ -1,6 +1,6 @@
 # SPEC — Ajuste anatómico (ojos, nariz, orejas) y maniquí realista
 
-**Estado:** investigación, simulación e implementación F1-F5 hechas; maniquí (F2) y simulación facial (F6) con trabajo pendiente · **Rev.:** 2026-11-20 (v3) · **Aplica a:** diseños 1, 2 y 3
+**Estado:** investigación, simulación e implementación F1-F5 hechas; maniquí (F2) y simulación facial (F6) con trabajo pendiente · **Rev.:** 2026-11-20 (v4) · **Aplica a:** diseños 1, 2 y 3
 **Origen:** el usuario detectó que los modelos *no se adaptan a ojos ni nariz* y que el maniquí *no tiene fisonomía real ni se ve profesional*.
 
 ---
@@ -165,7 +165,7 @@ La estructura pasa de "corona abierta que rodea una elipse" a **"visor curvo sob
 | --- | --- | --- | --- |
 | **F0** | Spec (este documento), referencias, línea base de campo visual | `docs/SPEC_AJUSTE_ANATOMICO.md`, `tools/campo_visual.py`, `references/` | ✔ hecho |
 | **F1 ✔** | Bloque `landmarks` en `eyeborg_config.json` (valores §3.2, con estado `ESTIMADO`/`VERIFICADO`) y lector común | `scripts/eyeborg_config.json`, `_eyeborg_config.py` | tests de lectura |
-| **F2 ◐** (rasgos y proporciones de literatura hechos; sin escultura realista ni texturas de piel finas) | Maniquí anatómico landmark-driven (ruta A) + materiales de piel/ojos | `eyeborg_part_14_maniqui.py`, `_eyeborg_materials.py` | vistas de cerca; `check_ergonomia` contra la malla nueva |
+| **F2 ✔** (ruta B: malla base CC0 de Blender Studio ajustada a las medidas; texturas de piel finas pendientes) | Maniquí anatómico landmark-driven (ruta A) + materiales de piel/ojos | `eyeborg_part_14_maniqui.py`, `_eyeborg_materials.py` | vistas de cerca; `check_ergonomia` contra la malla nueva |
 | **F3 ✔** | **Visor inuit + anclajes + brazos + puente nasal** como módulo nuevo; reubicar la barra de cámara; reconectar la corona abierta al visor | `eyeborg_part_15_visor.py` (+ ajustes en 01, 02, 04/05) | R1, R2, R3, R4, R5 en verde |
 | **F4 ◐** (campo visual, ojos, oreja, anclajes y maniquí hechos; falta `tools/anclajes.py` independiente) | Herramientas: ampliar `check_ergonomia` (ojo/pestañas/pads), `tools/anclajes.py`, `campo_visual.py` con ranuras | `tools/*.py` | informe de auditoría de 3 diseños |
 | **F6 ☐ pendiente** | Simulación facial: *shape keys* del maniquí (apertura bucal, sonrisa, ceño, parpadeo) y barrido de holguras por expresión; pads con compresión de tejido blando (4–6 mm) | `tools/simulacion_facial.py` (nuevo) | R13 en verde |
@@ -181,7 +181,7 @@ La estructura pasa de "corona abierta que rodea una elipse" a **"visor curvo sob
 | # | Riesgo / decisión | Impacto |
 | --- | --- | --- |
 | D1 ✔ | ¿Se ve a través del visor? **Resuelta por el usuario** (referencia: lentes inuit → se ve por ranuras) | Define R1 |
-| D2 | Ruta A (procedural) vs B (malla base CC0 descargada) para el maniquí | Realismo del maniquí; B requiere permiso de descarga |
+| D2 ✔ | Ruta B elegida y ejecutada: **malla base CC0** (Human Base Meshes v1.4.1) descargada con permiso del usuario | Maniquí realista |
 | D3 | Medidas faciales reales de la persona (nasion, alas, pómulo, oreja) | Sin ellas los landmarks son **estimados**; el ajuste fino exige fotos o escaneo |
 | D4 | Datos de §3 no verificados con fuentes en esta sesión | Verificar antes de fabricar |
 | D6 | Descargar la base pública ANSUR II (CSV) para percentiles de cabeza/cara y elegir el rango de tallas | Requiere permiso de descarga |
@@ -244,7 +244,33 @@ Medido con `tools/campo_visual.py`, `tools/check_ergonomia.py` y `tools/auditar.
 | Volumen de la estructura | 249 cm³ | **184 cm³** | — | −26 % |
 | Colisión con el torso en 14 poses | ninguna | **ninguna** (mín. 21.8 mm) | R11 | ✔ |
 
-**Qué cambió en el diseño**
+**Actualización v4 — maniquí con malla base CC0.** Con permiso del usuario se descargó *Human Base Meshes v1.4.1* (Blender Studio, CC0; `download.blender.org`, 50 643 039 bytes) y se extrajeron la cabeza y los ojos a [`assets/maniqui/`](../assets/maniqui/LICENCIA.md). La cabeza se **escala a las medidas verificadas** (IPD 65 mm → factor 1.006; profundidad craneal 202 mm; altura vértice–mentón 215 mm) y de ella se **derivan los landmarks reales** (centro del ojo z = +2.3 mm; ápex corneal y = −87.5 mm; punta nasal a −121.8 mm, es decir ≈ 21 mm de protrusión, como da la literatura). La ergonomía ahora se calcula **contra la piel real** (BVH de la malla), no contra el elipsoide.
+
+| Métrica (3 diseños) | Con maniquí de elipsoides (v3) | **Con malla real CC0 (v4)** |
+| --- | --- | --- |
+| Holgura mínima a la piel (fuera de anclajes) | 5.9 mm | **7.9 mm** (≥ 6 ✔) |
+| Distancia estructura–córnea | 17.0 mm | **21.3 mm** (≥ 15 ✔; la córnea real está 10 mm más atrás de lo estimado) |
+| Ventana de la ranura bloqueada | 1.0 % | **4.2 %** (puntales del puente nasal; umbral actualizado a ≤ 5 %) |
+| Campo visual central / medio / periférico bloqueado | 30.5 / 30.8 / 31.3 % | 36.5 / 33.0 / 34.2 % |
+| Anclajes con contacto | 6 de 6 | **6 de 6** (0.0 mm sobre la piel real) |
+| Ventana de oreja / vértices dentro del maniquí | 0 / 0 | **0 / 0** |
+| Dimensiones estructura | 193 × 283 × 137 mm | **190.5 × 285.7 × 137.1 mm** (184.7 cm³) |
+
+> **Ancho craneal:** la malla escalada queda en ≈ 157 mm frente a los 165 mm de la envolvente declarada; se priorizó el IPD (verificado). Hay que verificar qué mide realmente la envolvente de 165 mm (¿con orejas? ¿con almohadillado?).
+
+## 11b. Simulación de proporciones (cuánto tolera el diseño)
+
+`tools/simulacion_proporciones.py` mantiene el diseño fijo y escala la cabeza (X, Y, Z) y el IPD para ver qué rango de caras tolera. Resultado completo en [`simulaciones/proporciones.md`](../simulaciones/proporciones.md) y [`simulaciones/proporciones.jpg`](../simulaciones/proporciones.jpg).
+
+| Variación | Resultado | Lectura |
+| --- | --- | --- |
+| Cabeza estrecha −6 % X · baja −5 % Z · alta +5 % Z · IPD 58 mm | ✔ ajusta | el diseño tolera caras estrechas/pequeñas |
+| Cabeza corta −5 % Y · pequeña −5 % | ⚠ ajusta con almohadillas ajustables | las almohadillas frontales dejan de tocar (+4.6 a +5.2 mm) |
+| Cabeza ancha +6 % X · larga +5 % Y · grande +5 % · **IPD 72 mm** | ✘ no ajusta | holgura 3.5 / 3.6 / 2.9 / −0.1 mm y almohadillas de oreja penetrando (−8 mm con IPD 72) |
+
+**Conclusión de diseño:** el diseño actual cubre aproximadamente **−6 %…+3 % de ancho, −5 %…+2 % de largo y IPD ≈ 58–68 mm**. Para más rango se necesita: **tallas S/M/L generadas del mismo script** (parámetro de escala de la envolvente), **almohadillas ajustables** (nasal y de oreja) y **ranuras con margen** (ya ≥ 5.5 mm en X).
+
+**Qué cambió en el diseño (v3)**
 - **Eliminado del frente:** las diagonales, correas de abanico, paredes de ranura nasal y la horquilla de punta que cruzaban ojos y nariz.
 - **Nuevo:** visor inuit curvo (z −4…+22) con **dos ranuras 48 × 14 mm** alineadas a las pupilas; **almohadillas EVA** en el dorso nasal (2), la frente (2) y sobre el hélix (2); **brazos de sien** con gancho sobre la oreja; puntales de cámara desde el visor a la barra de la ESP-CAM.
 - **Conservado:** corona abierta (diagonal principal con cuerno, rieles, espinas de acento, alas), placa occipital, plataforma de cámara con bolsa.

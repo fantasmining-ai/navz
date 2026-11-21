@@ -1,0 +1,211 @@
+[
+  {
+    "variante": "base (medidas del usuario)",
+    "sx": 1,
+    "sy": 1,
+    "sz": 1,
+    "desalineo_x_mm": 0.0,
+    "desalineo_z_mm": 0.0,
+    "margen_ranura_x_mm": 9.0,
+    "margen_ranura_z_mm": 2.0,
+    "cornea_a_estructura_mm": 21.2,
+    "holgura_min_piel_mm": 7.9,
+    "vertices_dentro_piel": 0,
+    "ventana_ranura_bloqueada_pct": 5.3,
+    "almohadillas_mm": {
+      "FRONTAL": 0.0,
+      "NASAL": -1.2,
+      "OREJA": 0.0
+    }
+  },
+  {
+    "variante": "cabeza estrecha −6 % X",
+    "sx": 0.94,
+    "sy": 1,
+    "sz": 1,
+    "desalineo_x_mm": -2.0,
+    "desalineo_z_mm": 0.0,
+    "margen_ranura_x_mm": 7.0,
+    "margen_ranura_z_mm": 2.0,
+    "cornea_a_estructura_mm": 22.2,
+    "holgura_min_piel_mm": 8.2,
+    "vertices_dentro_piel": 0,
+    "ventana_ranura_bloqueada_pct": 9.0,
+    "almohadillas_mm": {
+      "FRONTAL": 0.5,
+      "NASAL": -0.8,
+      "OREJA": 1.0
+    }
+  },
+  {
+    "variante": "cabeza ancha +6 % X",
+    "sx": 1.06,
+    "sy": 1,
+    "sz": 1,
+    "desalineo_x_mm": 2.0,
+    "desalineo_z_mm": 0.0,
+    "margen_ranura_x_mm": 7.0,
+    "margen_ranura_z_mm": 2.0,
+    "cornea_a_estructura_mm": 20.3,
+    "holgura_min_piel_mm": 3.5,
+    "vertices_dentro_piel": 0,
+    "ventana_ranura_bloqueada_pct": 3.2,
+    "almohadillas_mm": {
+      "FRONTAL": -0.4,
+      "NASAL": -1.5,
+      "OREJA": -4.5
+    }
+  },
+  {
+    "variante": "cabeza corta −5 % Y",
+    "sx": 1,
+    "sy": 0.95,
+    "sz": 1,
+    "desalineo_x_mm": 0.0,
+    "desalineo_z_mm": 0.0,
+    "margen_ranura_x_mm": 9.0,
+    "margen_ranura_z_mm": 2.0,
+    "cornea_a_estructura_mm": 24.8,
+    "holgura_min_piel_mm": 8.3,
+    "vertices_dentro_piel": 0,
+    "ventana_ranura_bloqueada_pct": 14.8,
+    "almohadillas_mm": {
+      "FRONTAL": 4.6,
+      "NASAL": 1.3,
+      "OREJA": -0.1
+    }
+  },
+  {
+    "variante": "cabeza larga +5 % Y",
+    "sx": 1,
+    "sy": 1.05,
+    "sz": 1,
+    "desalineo_x_mm": 0.0,
+    "desalineo_z_mm": 0.0,
+    "margen_ranura_x_mm": 9.0,
+    "margen_ranura_z_mm": 2.0,
+    "cornea_a_estructura_mm": 17.8,
+    "holgura_min_piel_mm": 3.6,
+    "vertices_dentro_piel": 0,
+    "ventana_ranura_bloqueada_pct": 1.1,
+    "almohadillas_mm": {
+      "FRONTAL": -4.5,
+      "NASAL": -4.0,
+      "OREJA": 0.0
+    }
+  },
+  {
+    "variante": "cabeza baja −5 % Z",
+    "sx": 1,
+    "sy": 1,
+    "sz": 0.95,
+    "desalineo_x_mm": 0.0,
+    "desalineo_z_mm": -0.1,
+    "margen_ranura_x_mm": 9.0,
+    "margen_ranura_z_mm": 1.9,
+    "cornea_a_estructura_mm": 21.2,
+    "holgura_min_piel_mm": 7.8,
+    "vertices_dentro_piel": 0,
+    "ventana_ranura_bloqueada_pct": 5.3,
+    "almohadillas_mm": {
+      "FRONTAL": 0.3,
+      "NASAL": -1.4,
+      "OREJA": -0.1
+    }
+  },
+  {
+    "variante": "cabeza alta +5 % Z",
+    "sx": 1,
+    "sy": 1,
+    "sz": 1.05,
+    "desalineo_x_mm": 0.0,
+    "desalineo_z_mm": 0.1,
+    "margen_ranura_x_mm": 9.0,
+    "margen_ranura_z_mm": 1.9,
+    "cornea_a_estructura_mm": 21.2,
+    "holgura_min_piel_mm": 7.1,
+    "vertices_dentro_piel": 0,
+    "ventana_ranura_bloqueada_pct": 5.3,
+    "almohadillas_mm": {
+      "FRONTAL": -0.2,
+      "NASAL": -1.0,
+      "OREJA": -0.4
+    }
+  },
+  {
+    "variante": "IPD 58 mm",
+    "sx": 0.892,
+    "sy": 1,
+    "sz": 1,
+    "desalineo_x_mm": -3.5,
+    "desalineo_z_mm": 0.0,
+    "margen_ranura_x_mm": 5.5,
+    "margen_ranura_z_mm": 2.0,
+    "cornea_a_estructura_mm": 22.3,
+    "holgura_min_piel_mm": 8.2,
+    "vertices_dentro_piel": 0,
+    "ventana_ranura_bloqueada_pct": 13.8,
+    "almohadillas_mm": {
+      "FRONTAL": 0.9,
+      "NASAL": -0.6,
+      "OREJA": 2.6
+    }
+  },
+  {
+    "variante": "IPD 72 mm",
+    "sx": 1.108,
+    "sy": 1,
+    "sz": 1,
+    "desalineo_x_mm": 3.5,
+    "desalineo_z_mm": 0.0,
+    "margen_ranura_x_mm": 5.5,
+    "margen_ranura_z_mm": 2.0,
+    "cornea_a_estructura_mm": 19.4,
+    "holgura_min_piel_mm": -0.1,
+    "vertices_dentro_piel": 10,
+    "ventana_ranura_bloqueada_pct": 3.2,
+    "almohadillas_mm": {
+      "FRONTAL": -0.8,
+      "NASAL": -1.8,
+      "OREJA": -8.0
+    }
+  },
+  {
+    "variante": "pequeña (−5 % X,Y,Z)",
+    "sx": 0.95,
+    "sy": 0.95,
+    "sz": 0.95,
+    "desalineo_x_mm": -1.6,
+    "desalineo_z_mm": -0.1,
+    "margen_ranura_x_mm": 7.4,
+    "margen_ranura_z_mm": 1.9,
+    "cornea_a_estructura_mm": 25.6,
+    "holgura_min_piel_mm": 11.6,
+    "vertices_dentro_piel": 0,
+    "ventana_ranura_bloqueada_pct": 18.5,
+    "almohadillas_mm": {
+      "FRONTAL": 5.2,
+      "NASAL": 1.5,
+      "OREJA": 1.1
+    }
+  },
+  {
+    "variante": "grande (+5 % X,Y,Z)",
+    "sx": 1.05,
+    "sy": 1.05,
+    "sz": 1.05,
+    "desalineo_x_mm": 1.6,
+    "desalineo_z_mm": 0.1,
+    "margen_ranura_x_mm": 7.4,
+    "margen_ranura_z_mm": 1.9,
+    "cornea_a_estructura_mm": 17.0,
+    "holgura_min_piel_mm": 2.9,
+    "vertices_dentro_piel": 0,
+    "ventana_ranura_bloqueada_pct": 0.0,
+    "almohadillas_mm": {
+      "FRONTAL": -5.2,
+      "NASAL": -4.1,
+      "OREJA": -3.7
+    }
+  }
+]

@@ -21,7 +21,7 @@ def _part(name, c, r, col):
     me = bpy.data.meshes.new(name + '_TMP'); bm.to_mesh(me); bm.free()
     o = bpy.data.objects.new(name, me); col.objects.link(o); return o
 
-def build():
+def build_procedural():
     import bmesh
     from _eyeborg_core import fuse_objects
     M = CONFIG['mannequin']
@@ -47,6 +47,42 @@ def build():
         me_ = o.data; bpy.data.objects.remove(o, do_unlink=True); bpy.data.meshes.remove(me_)
     body['nota'] = 'maniqui esquematico; no es un escaneo. Cuello: radio de la circunferencia verificada (380 mm)'
     return col
+
+def build_base():
+    """Ruta B: cabeza real de la malla base CC0 (Human Base Meshes v1.4.1), escalada a las medidas del usuario."""
+    import numpy as np
+    M = CONFIG['mannequin']; B = M['base_mesh']
+    path = os.path.join(os.path.dirname(_SCRIPT_DIR), B['asset'])
+    names = [B['objetos']['cuerpo']] + B['objetos']['esclera'] + B['objetos']['iris']
+    with bpy.data.libraries.load(path, link=False) as (src, dst):
+        dst.objects = [n for n in names if n in src.objects]
+    col = get_collection('EYEBORG_14_MANIQUI', clear=True)
+    mat_ = plastic('MANIQUI_MATE', (0.16, 0.16, 0.17, 1), 0.5)
+    esc_m = plastic('OJO_ESCLERA', (0.80, 0.78, 0.74, 1), 0.25)
+    iris_m = plastic('OJO_IRIS', (0.10, 0.06, 0.03, 1), 0.2)
+    sc = B['escala_mm_por_m']; cx, cy, cz = B['centro_x_m'], B['centro_y_m'], B['centro_z_m']
+    alias = {B['objetos']['cuerpo']: ('MANIQUI_CUERPO', mat_)}
+    for k, n in enumerate(B['objetos']['esclera']): alias[n] = ('MANIQUI_OJO_ESCLERA_' + ('L' if k == 0 else 'R'), esc_m)
+    for k, n in enumerate(B['objetos']['iris']): alias[n] = ('MANIQUI_OJO_IRIS_' + ('L' if k == 0 else 'R'), iris_m)
+    for o in dst.objects:
+        me = o.data; n_ = len(me.vertices)
+        a = np.empty(n_ * 3); me.vertices.foreach_get('co', a); a = a.reshape(-1, 3)
+        a[:, 0] = (a[:, 0] - cx) * sc[0]; a[:, 1] = (a[:, 1] - cy) * sc[1]; a[:, 2] = (a[:, 2] - cz) * sc[2]
+        me.vertices.foreach_set('co', a.ravel()); me.update()
+        nuevo, mt = alias[o.name]
+        o.name = nuevo; o.data.name = nuevo + '_MESH'; col.objects.link(o)
+        me.materials.clear(); me.materials.append(mt)
+        for p_ in me.polygons: p_.use_smooth = True
+        o['nota'] = 'maniqui con malla base CC0 (Blender Studio); escalado a las medidas del usuario; no es un escaneo de la persona'
+    from _eyeborg_core import set_head_mesh
+    set_head_mesh(bpy.data.objects['MANIQUI_CUERPO'])      # la ergonomia se calcula contra la piel real
+    return col
+
+def build():
+    B = CONFIG['mannequin'].get('base_mesh', {})
+    if B.get('activo') and os.path.isfile(os.path.join(os.path.dirname(_SCRIPT_DIR), B.get('asset', ''))):
+        return build_base()
+    return build_procedural()
 
 if __name__ == "__main__":
     build()

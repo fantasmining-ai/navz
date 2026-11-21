@@ -24,11 +24,14 @@ ear = [g for g in gs if abs(g[1].y-6) < 34 and abs(g[1].z+18) < 26 and g[1].x*g[
 print('VERTICES_EN_VENTANA_OREJA', len(ear))
 # ojos: distancia de la estructura al centro de la cornea de cada ojo (R2: >= 15 mm) y a la superficie del parpado
 import json, os
-_cfg = None
+import json as _j
+_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+_C = _j.load(open(os.path.join(_root, 'scripts', 'eyeborg_config.json'), encoding='utf-8'))
+_LM = _C['landmarks']; _LM_X = _C['anthropometry']['ipd_mm'] / 2.0
 from mathutils.bvhtree import BVHTree as _B
 _bm = bmesh.new(); _bm.from_mesh(f.data); _tree = _B.FromBMesh(_bm)
 for sgn in (1, -1):
-    cp = Vector((sgn * 32.5, -97.0, 6.0))
+    cp = Vector((sgn * _LM_X, _LM['cornea_apex_y'], _LM['eye_center_z']))
     loc, nrm, idx, dist = _tree.find_nearest(cp)
     print('OJO_%s_DISTANCIA_MIN_A_ESTRUCTURA_mm' % ('IZQ' if sgn > 0 else 'DER'), round(dist, 1), [round(c, 1) for c in loc])
 _bm.free()

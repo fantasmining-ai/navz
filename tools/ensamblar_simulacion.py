@@ -15,3 +15,15 @@ anim = sorted(glob.glob(os.path.join(fr, 'anim_*.png')))
 frames = [Image.open(f).convert('RGB').resize((336, 312)).convert('P', palette=Image.ADAPTIVE, colors=64) for f in anim]
 frames[0].save(os.path.join(out, 'movimiento_cuello.gif'), save_all=True, append_images=frames[1:], duration=60, loop=0, optimize=True)
 print('poses', len(poses), 'frames', len(anim))
+
+# hoja de proporciones (si existe)
+import json
+pf = os.path.join(raiz, 'simulaciones', '_frames_prop'); vf = sorted(glob.glob(os.path.join(pf, 'v*.png')))
+if vf:
+    nombres = [d['variante'] for d in json.load(open(os.path.join(out, 'datos_proporciones.json'), encoding='utf-8'))]
+    w, h, cols = 420, 380, 4; rows = (len(vf) + cols - 1) // cols
+    hoja = Image.new('RGB', (cols * w, rows * h), (20, 22, 26)); d = ImageDraw.Draw(hoja)
+    for i, f in enumerate(vf):
+        x, y = (i % cols) * w, (i // cols) * h; hoja.paste(Image.open(f).convert('RGB'), (x, y)); d.rectangle((x, y, x + w, y + 22), fill=(0, 0, 0))
+        d.text((x + 8, y + 5), nombres[i] if i < len(nombres) else os.path.basename(f), fill=(230, 240, 250))
+    hoja.save(os.path.join(out, 'proporciones.jpg'), quality=88); print('proporciones', len(vf))
